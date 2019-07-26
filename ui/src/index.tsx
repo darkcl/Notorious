@@ -3,7 +3,13 @@ import * as ReactDOM from 'react-dom';
 
 import App from './components/App';
 
-ReactDOM.render (
-  <App color="Blue" />,
+declare var counter;
+
+const render = () => ReactDOM.render (
+  <App color="Blue"/>,
   document.getElementById("root")
 );
+
+counter.render = render;
+
+render()

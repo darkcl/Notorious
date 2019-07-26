@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/darkcl/Notorious/models"
 	"github.com/leaanthony/mewn"
 	"github.com/zserge/webview"
 )
@@ -42,5 +43,9 @@ func main() {
 		URL:   "file://" + abs,
 	})
 	defer w.Exit()
+	w.Dispatch(func() {
+		// Inject controller
+		w.Bind("counter", &models.Counter{})
+	})
 	w.Run()
 }
