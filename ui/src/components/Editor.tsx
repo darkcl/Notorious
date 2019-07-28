@@ -1,36 +1,42 @@
 import * as React from "react";
-import ReactMde from "react-mde";
+import * as CodeMirror from "@skidding/react-codemirror";
+import { IEditor } from "../interface/IEditor";
 
-import * as Showdown from "showdown";
-import "react-mde/lib/styles/css/react-mde-all.css";
+import "codemirror/lib/codemirror.css";
+import "codemirror/mode/javascript/javascript";
+import "codemirror/mode/python/python";
+import "codemirror/mode/xml/xml";
+import "codemirror/mode/markdown/markdown";
+import "codemirror/theme/monokai.css";
 
 declare var external;
 
-const converter = new Showdown.Converter({
-  tables: true,
-  simplifiedAutoLink: true,
-  strikethrough: true,
-  tasklists: true
-});
+export class Editor extends React.Component<
+  IEditor & React.HTMLAttributes<HTMLDivElement>,
+  {}
+> {
+  constructor(props) {
+    super(props);
 
-export default function Editor() {
-  const [value, setValue] = React.useState("**Hello world!!!**");
-  const [selectedTab, setSelectedTab] = React.useState("write");
+    this.updateCode = this.updateCode.bind(this);
+  }
 
-  return (
-    <div className="container">
-      <ReactMde
-        value={value}
-        onChange={value => {
-          setValue(value);
-          external.invoke("editor.onChange: " + value);
-        }}
-        selectedTab={selectedTab as "write" | "preview"}
-        onTabChange={setSelectedTab}
-        generateMarkdownPreview={markdown =>
-          Promise.resolve(converter.makeHtml(markdown))
-        }
+  updateCode(e) {
+    this.props.onChange(e);
+  }
+
+  render() {
+    var options = {
+      mode: "markdown",
+      theme: "monokai"
+    };
+    return (
+      <CodeMirror
+        value={this.props.value}
+        options={options}
+        height="100%"
+        onChange={this.updateCode}
       />
-    </div>
-  );
+    );
+  }
 }

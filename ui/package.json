@@ -15,7 +15,6 @@
     "css-loader": "^3.1.0",
     "file-loader": "^4.1.0",
     "html-webpack-plugin": "^3.2.0",
-    "lodash": "^4.17.15",
     "style-loader": "^0.23.1",
     "typescript": "^3.5.3",
     "typescript-plugin-styled-components": "^1.4.3",
@@ -24,12 +23,11 @@
     "webpack-cli": "^3.3.6"
   },
   "dependencies": {
-    "codemirror": "^5.48.2",
-    "hypermd": "^0.3.11",
+    "@skidding/react-codemirror": "^1.0.2",
     "react": "^16.8.6",
-    "react-codemirror": "^1.0.0",
     "react-dom": "^16.8.6",
-    "react-mde": "^7.6.2",
+    "react-markdown": "^4.1.0",
+    "react-split-pane": "^0.1.87",
     "showdown": "^1.9.0",
     "styled-components": "^4.3.2"
   }

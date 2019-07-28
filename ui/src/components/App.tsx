@@ -1,24 +1,43 @@
 import * as React from "react";
-import styled from "styled-components";
-import PageInterface from "../interface/Pageinterface";
-import FileList from "./FileList";
-import Editor from "./Editor";
+import SplitPane from "react-split-pane";
+import * as ReactMarkdown from "react-markdown";
 
-const PStyled = styled("p")`
-  background-color: red;
-`;
+import "../style/App.css";
+import { IAppState } from "../interface/IAppState";
 
-class App extends React.Component<PageInterface, {}> {
+import { Editor } from "./Editor";
+
+class App extends React.Component<{}, IAppState> {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      markdownSrc: "# Hello World"
+    };
+
+    this.onMarkdownChange = this.onMarkdownChange.bind(this);
+  }
+
+  onMarkdownChange(md) {
+    this.setState({
+      markdownSrc: md
+    });
+  }
+
   render() {
     return (
-      <div>
-        <div className="EditorContainer">
-          <Editor />
+      <SplitPane split="vertical" defaultSize="50%">
+        <div className="editor-pane">
+          <Editor
+            className="editor"
+            value={this.state.markdownSrc}
+            onChange={this.onMarkdownChange}
+          />
         </div>
-
-        <h1> Go Data </h1>
-        <FileList />
-      </div>
+        <div className="view-pane">
+          <ReactMarkdown className="result" source={this.state.markdownSrc} />
+        </div>
+      </SplitPane>
     );
   }
 }

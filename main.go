@@ -56,6 +56,8 @@ func main() {
 		Title:                  "Notorious",
 		URL:                    "file://" + abs,
 		Resizable:              true,
+		Width:                  1024,
+		Height:                 768,
 		ExternalInvokeCallback: handleRPC,
 		Debug:                  true,
 	})
