@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/darkcl/Notorious/models"
 	"github.com/leaanthony/mewn"
@@ -13,7 +14,13 @@ import (
 )
 
 func handleRPC(w webview.WebView, data string) {
-	fmt.Printf("Recieved Event: %s\n", data)
+	switch {
+	case strings.HasPrefix(data, "editor.onChange: "):
+		fmt.Printf("Recieved Editor changes:\n%s\n", strings.TrimPrefix(data, "editor.onChange: "))
+	default:
+		panic("Not Implemented")
+	}
+
 }
 
 func main() {

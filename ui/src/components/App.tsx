@@ -15,7 +15,8 @@ class App extends React.Component<PageInterface, {}> {
         <div className="EditorContainer">
           <Editor />
         </div>
-        <h1> Go Data </h1>open
+
+        <h1> Go Data </h1>
         <FileList />
       </div>
     );
