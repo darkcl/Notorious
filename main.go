@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/darkcl/Notorious/models"
+	"github.com/darkcl/Notorious/helpers"
 	"github.com/leaanthony/mewn"
 	webview "github.com/zserge/webview"
 )
@@ -16,7 +17,11 @@ import (
 func handleRPC(w webview.WebView, data string) {
 	switch {
 	case strings.HasPrefix(data, "editor.onChange: "):
-		fmt.Printf("Recieved Editor changes:\n%s\n", strings.TrimPrefix(data, "editor.onChange: "))
+		fmt.Printf("editor.onChange:\n%s\n", strings.TrimPrefix(data, "editor.onChange: "))
+	case strings.HasPrefix(data, "openlink: "):
+		url := strings.TrimPrefix(data, "openlink: ")
+		fmt.Printf("openlink:\n%s\n", url)
+		helpers.OpenBrowser(url)
 	default:
 		panic("Not Implemented")
 	}
