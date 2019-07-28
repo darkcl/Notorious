@@ -2,8 +2,9 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 import "./style/index.css";
+import "@atlaskit/css-reset/dist/bundle.css";
 
-import App from "./components/App";
+import App from "./page/App";
 
 declare var external;
 declare var folder;

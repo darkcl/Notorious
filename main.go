@@ -11,7 +11,7 @@ import (
 	"github.com/darkcl/Notorious/models"
 	"github.com/darkcl/Notorious/helpers"
 	"github.com/leaanthony/mewn"
-	webview "github.com/zserge/webview"
+	webview "github.com/lukevers/webview"
 )
 
 func handleRPC(w webview.WebView, data string) {

@@ -23,9 +23,14 @@
     "webpack-cli": "^3.3.6"
   },
   "dependencies": {
+    "@atlaskit/css-reset": "^5.0.4",
+    "@atlaskit/global-navigation": "^7.3.6",
+    "@atlaskit/icon": "^19.0.1",
+    "@atlaskit/navigation-next": "^6.3.8",
     "@skidding/react-codemirror": "^1.0.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-intl": "^2.9.0",
     "react-markdown": "^4.1.0",
     "react-split-pane": "^0.1.87",
     "react-syntax-highlighter": "^11.0.2",

@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/zserge/webview"
+	"github.com/lukevers/webview"
 )
 
 // Folder - Describe current folder structure
@@ -25,17 +25,18 @@ func NewFolderController(webView webview.WebView) *Folder {
 	}
 }
 
-func visit(files *[]string) filepath.WalkFunc {
-	return func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			log.Fatal(err)
-		}
-		*files = append(*files, path)
-		return nil
-	}
-}
-
 func (f *Folder) Read() {
-	files := f.webView.Dialog(webview.DialogTypeOpen, webview.DialogFlagDirectory, "Open directory", "")
-	fmt.Printf("Selected Folder: %s\n", files)
+	dir := f.webView.Dialog(webview.DialogTypeOpen, webview.DialogFlagDirectory, "Open directory", "")
+	err := filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		fmt.Println(path, info.Size())
+		return nil
+	})
+
+	if err != nil {
+		log.Fatal(err)
+		panic(err)
+	}
 }

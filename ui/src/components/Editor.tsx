@@ -26,9 +26,11 @@ export class Editor extends React.Component<
   }
 
   render() {
-    var options = {
+    const options = {
       mode: "markdown",
-      theme: "monokai"
+      theme: "monokai",
+      lineNumbers: true,
+      lineWrapping: true
     };
     return (
       <CodeMirror
