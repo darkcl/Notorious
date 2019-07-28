@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -8,8 +9,12 @@ import (
 
 	"github.com/darkcl/Notorious/models"
 	"github.com/leaanthony/mewn"
-	"github.com/zserge/webview"
+	webview "github.com/zserge/webview"
 )
+
+func handleRPC(w webview.WebView, data string) {
+	fmt.Printf("Recieved Event: %s\n", data)
+}
 
 func main() {
 	js := mewn.String("./ui/dist/bundle.min.js")
@@ -38,14 +43,19 @@ func main() {
 		panic(err)
 	}
 
+	fmt.Printf("Path: %s\n", abs)
+
 	w := webview.New(webview.Settings{
-		Title: "Notorious",
-		URL:   "file://" + abs,
+		Title:                  "Notorious",
+		URL:                    "file://" + abs,
+		Resizable:              true,
+		ExternalInvokeCallback: handleRPC,
+		Debug:                  true,
 	})
 	defer w.Exit()
 	w.Dispatch(func() {
 		// Inject controller
-		w.Bind("counter", &models.Counter{})
+		w.Bind("folder", models.NewFolderController(w))
 	})
 	w.Run()
 }

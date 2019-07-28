@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import PageInterface from "../interface/Pageinterface";
-import Counter from "./Counter";
+import FileList from "./FileList";
 import Editor from "./Editor";
 
 const PStyled = styled("p")`
@@ -15,9 +15,8 @@ class App extends React.Component<PageInterface, {}> {
         <div className="EditorContainer">
           <Editor />
         </div>
-
-        <h1> Go Data </h1>
-        <Counter />
+        <h1> Go Data </h1>open
+        <FileList />
       </div>
     );
   }

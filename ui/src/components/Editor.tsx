@@ -4,6 +4,8 @@ import ReactMde from "react-mde";
 import * as Showdown from "showdown";
 import "react-mde/lib/styles/css/react-mde-all.css";
 
+declare var external;
+
 const converter = new Showdown.Converter({
   tables: true,
   simplifiedAutoLink: true,
@@ -19,7 +21,10 @@ export default function Editor() {
     <div className="container">
       <ReactMde
         value={value}
-        onChange={setValue}
+        onChange={value => {
+          setValue(value);
+          external.invoke("editor.onChange: " + value);
+        }}
         selectedTab={selectedTab as "write" | "preview"}
         onTabChange={setSelectedTab}
         generateMarkdownPreview={markdown =>
