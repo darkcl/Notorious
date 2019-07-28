@@ -1,27 +1,20 @@
 {
-  "exclude": [
-    "./webpack.config.js"
-  ],
+  "exclude": ["./webpack.config.js"],
   "compilerOptions": {
     "types": ["react"],
     "sourceMap": true,
     "noImplicitAny": false,
     "module": "commonjs",
     "target": "es6",
-    "lib": [
-      "es2015",
-      "es2017",
-      "dom"
-    ],
+    "lib": ["es2015", "es2017", "dom"],
     "removeComments": true,
     "allowSyntheticDefaultImports": false,
     "jsx": "react",
     "allowJs": true,
     "baseUrl": "./",
     "paths": {
-      "components/*": [
-        "src/components/*"
-      ],
-    }
+      "components/*": ["src/components/*"]
+    },
+    "typeRoots": ["./node_modules/@types"]
   }
 }
