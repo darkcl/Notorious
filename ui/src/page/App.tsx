@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Fragment } from "react";
+import { Fragment, useReducer, useContext } from "react";
 import EmojiAtlassianIcon from "@atlaskit/icon/glyph/emoji/atlassian";
 import { AtlassianWordmark } from "@atlaskit/logo";
 import {
@@ -17,6 +17,25 @@ import AppSwitcherIcon from "@atlaskit/icon/glyph/app-switcher";
 import GlobalNavigation from "@atlaskit/global-navigation";
 
 import { EditorPage } from "./EditorPage";
+import { AppContext } from "../state/AppContext";
+
+const initialState = {
+  isPreview: false
+};
+
+const UPDATE_EDITOR_MODE = "UPDATE_EDITOR_MODE";
+
+function reducer(state, action) {
+  console.log("reducer:", state, action);
+  switch (action.type) {
+    case UPDATE_EDITOR_MODE:
+      return {
+        isPreview: action.isPreview
+      };
+    default:
+      return initialState;
+  }
+}
 
 const AppSwitcherComponent = props => (
   <GlobalItem
@@ -45,47 +64,57 @@ const Global = () => (
   />
 );
 
-const MyProductNavigation = () => (
-  <Fragment>
-    <HeaderSection>
-      {({ className }) => (
-        <div className={className}>
-          <Wordmark wordmark={AtlassianWordmark} />
-        </div>
-      )}
-    </HeaderSection>
-    <MenuSection>
-      {({ className }) => (
-        <div className={className}>
-          <Item
-            text="Dashboard"
-            onClick={() => console.log("click dashboard")}
-          />
-          <Item text="Things" />
-          <Item text="Settings" />
-          <Separator />
-          <GroupHeading>Add-ons</GroupHeading>
-          <Item text="My plugin" />
-        </div>
-      )}
-    </MenuSection>
-  </Fragment>
-);
+const MyProductNavigation = () => {
+  const { appState, dispatch } = React.useContext(AppContext);
+  return (
+    <Fragment>
+      <HeaderSection>
+        {({ className }) => (
+          <div className={className}>
+            <Wordmark wordmark={AtlassianWordmark} />
+          </div>
+        )}
+      </HeaderSection>
+      <MenuSection>
+        {({ className }) => (
+          <div className={className}>
+            <Item
+              text="Dashboard"
+              onClick={() => {
+                console.log(`${appState.isPreview}`);
+                dispatch({
+                  type: UPDATE_EDITOR_MODE,
+                  isPreview: !appState.isPreview
+                });
+              }}
+            />
+            <Item text="Things" />
+            <Item text="Settings" />
+            <Separator />
+            <GroupHeading>Add-ons</GroupHeading>
+            <Item text="My plugin" />
+          </div>
+        )}
+      </MenuSection>
+    </Fragment>
+  );
+};
 
-class App extends React.Component {
-  render() {
-    return (
+const App = () => {
+  const [appState, dispatch] = useReducer(reducer, initialState);
+  return (
+    <AppContext.Provider value={{ appState, dispatch }}>
       <NavigationProvider>
         <LayoutManager
           globalNavigation={Global}
           productNavigation={MyProductNavigation}
           containerNavigation={null}
         >
-          <EditorPage />
+          <EditorPage isPreview={appState.isPreview} />
         </LayoutManager>
       </NavigationProvider>
-    );
-  }
-}
+    </AppContext.Provider>
+  );
+};
 
 export default App;

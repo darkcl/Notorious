@@ -12,7 +12,9 @@ declare var folder;
 const render = () => ReactDOM.render(<App />, document.getElementById("root"));
 
 // counter.render = render;
-folder.render = render;
+// if (folder !== undefined) {
+//   folder.render = render;
+// }
 
 window.onclick = function(e) {
   const elem = e.target as Element;

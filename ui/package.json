@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "watch": "webpack --watch --mode development"
   },
   "devDependencies": {
     "@types/react": "^16.8.23",
