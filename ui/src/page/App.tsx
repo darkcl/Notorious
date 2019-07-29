@@ -2,6 +2,7 @@ import * as React from "react";
 import { Fragment, useReducer, useContext } from "react";
 import EmojiAtlassianIcon from "@atlaskit/icon/glyph/emoji/atlassian";
 import { AtlassianWordmark } from "@atlaskit/logo";
+import Hotkeys from "react-hot-keys";
 import {
   GlobalItem,
   GroupHeading,
@@ -82,10 +83,6 @@ const MyProductNavigation = () => {
               text="Dashboard"
               onClick={() => {
                 console.log(`${appState.isPreview}`);
-                dispatch({
-                  type: UPDATE_EDITOR_MODE,
-                  isPreview: !appState.isPreview
-                });
               }}
             />
             <Item text="Things" />
@@ -103,17 +100,32 @@ const MyProductNavigation = () => {
 const App = () => {
   const [appState, dispatch] = useReducer(reducer, initialState);
   return (
-    <AppContext.Provider value={{ appState, dispatch }}>
-      <NavigationProvider>
-        <LayoutManager
-          globalNavigation={Global}
-          productNavigation={MyProductNavigation}
-          containerNavigation={null}
-        >
-          <EditorPage isPreview={appState.isPreview} />
-        </LayoutManager>
-      </NavigationProvider>
-    </AppContext.Provider>
+    <Hotkeys
+      keyName="ctrl+e"
+      filter={event => {
+        return true;
+      }}
+      onKeyDown={(keyName, e, handle) => {
+        e.preventDefault();
+        dispatch({
+          type: UPDATE_EDITOR_MODE,
+          isPreview: !appState.isPreview
+        });
+      }}
+      onKeyUp={(keyName, e, handle) => {}}
+    >
+      <AppContext.Provider value={{ appState, dispatch }}>
+        <NavigationProvider>
+          <LayoutManager
+            globalNavigation={Global}
+            productNavigation={MyProductNavigation}
+            containerNavigation={null}
+          >
+            <EditorPage isPreview={appState.isPreview} />
+          </LayoutManager>
+        </NavigationProvider>
+      </AppContext.Provider>
+    </Hotkeys>
   );
 };
 

@@ -30,7 +30,6 @@ export const EditorPage = props => {
           onKeyDown={this.onKeyPressed}
         />
       )}
-      ;
     </div>
   );
 };
