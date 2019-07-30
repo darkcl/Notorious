@@ -1,5 +1,5 @@
 {
-  "exclude": ["./webpack.config.js"],
+  "exclude": ["./webpack.config.js", "./dist/*"],
   "compilerOptions": {
     "types": ["react"],
     "sourceMap": true,
