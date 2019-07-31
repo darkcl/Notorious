@@ -5,11 +5,18 @@ import "./style/index.css";
 import "@atlaskit/css-reset/dist/bundle.css";
 
 import App from "./page/App";
+import { Store } from "./store";
 
 declare var external;
 declare var folder;
 
-const render = () => ReactDOM.render(<App />, document.getElementById("root"));
+const render = () =>
+  ReactDOM.render(
+    <Store>
+      <App />
+    </Store>,
+    document.getElementById("root")
+  );
 
 // counter.render = render;
 // if (folder !== undefined) {

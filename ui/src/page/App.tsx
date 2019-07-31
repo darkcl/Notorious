@@ -1,42 +1,21 @@
 import * as React from "react";
-import { Fragment, useReducer, useContext } from "react";
+import { useReducer, useContext } from "react";
 import EmojiAtlassianIcon from "@atlaskit/icon/glyph/emoji/atlassian";
-import { AtlassianWordmark } from "@atlaskit/logo";
 import Hotkeys from "react-hot-keys";
 import {
   GlobalItem,
-  GroupHeading,
   LayoutManager,
-  HeaderSection,
-  MenuSection,
-  NavigationProvider,
-  Item,
-  Separator,
-  Wordmark
+  NavigationProvider
 } from "@atlaskit/navigation-next";
 import AppSwitcherIcon from "@atlaskit/icon/glyph/app-switcher";
 import GlobalNavigation from "@atlaskit/global-navigation";
 
 import { EditorPage } from "./EditorPage";
-import { AppContext } from "../state/AppContext";
-
-const initialState = {
-  isPreview: false
-};
-
-const UPDATE_EDITOR_MODE = "UPDATE_EDITOR_MODE";
-
-function reducer(state, action) {
-  console.log("reducer:", state, action);
-  switch (action.type) {
-    case UPDATE_EDITOR_MODE:
-      return {
-        isPreview: action.isPreview
-      };
-    default:
-      return initialState;
-  }
-}
+import { ProductNavigation } from "../components/ProductNavigation";
+import { ContainerNavigation } from "../components/ContainerNavigation";
+import { EditorStore } from "../store";
+import { EditorActions } from "../store/EditorStore";
+import { NavigationStore } from "../store/NavigationStore";
 
 const AppSwitcherComponent = props => (
   <GlobalItem
@@ -65,40 +44,12 @@ const Global = () => (
   />
 );
 
-const MyProductNavigation = () => {
-  const { appState, dispatch } = React.useContext(AppContext);
-  return (
-    <Fragment>
-      <HeaderSection>
-        {({ className }) => (
-          <div className={className}>
-            <Wordmark wordmark={AtlassianWordmark} />
-          </div>
-        )}
-      </HeaderSection>
-      <MenuSection>
-        {({ className }) => (
-          <div className={className}>
-            <Item
-              text="Dashboard"
-              onClick={() => {
-                console.log(`${appState.isPreview}`);
-              }}
-            />
-            <Item text="Things" />
-            <Item text="Settings" />
-            <Separator />
-            <GroupHeading>Add-ons</GroupHeading>
-            <Item text="My plugin" />
-          </div>
-        )}
-      </MenuSection>
-    </Fragment>
-  );
-};
-
 const App = () => {
-  const [appState, dispatch] = useReducer(reducer, initialState);
+  const editorState = React.useContext(EditorStore.State);
+  const editorDispatch = React.useContext(EditorStore.Dispatch);
+
+  const navigationState = React.useContext(NavigationStore.State);
+
   return (
     <Hotkeys
       keyName="ctrl+e"
@@ -107,24 +58,24 @@ const App = () => {
       }}
       onKeyDown={(keyName, e, handle) => {
         e.preventDefault();
-        dispatch({
-          type: UPDATE_EDITOR_MODE,
-          isPreview: !appState.isPreview
+        editorDispatch({
+          type: EditorActions.UPDATE_EDITOR_MODE,
+          isPreview: !editorState.isPreview
         });
       }}
       onKeyUp={(keyName, e, handle) => {}}
     >
-      <AppContext.Provider value={{ appState, dispatch }}>
-        <NavigationProvider>
-          <LayoutManager
-            globalNavigation={Global}
-            productNavigation={MyProductNavigation}
-            containerNavigation={null}
-          >
-            <EditorPage isPreview={appState.isPreview} />
-          </LayoutManager>
-        </NavigationProvider>
-      </AppContext.Provider>
+      <NavigationProvider>
+        <LayoutManager
+          globalNavigation={Global}
+          productNavigation={ProductNavigation}
+          containerNavigation={
+            navigationState.workingDirectory !== "" ? ContainerNavigation : null
+          }
+        >
+          <EditorPage isPreview={editorState.isPreview} />
+        </LayoutManager>
+      </NavigationProvider>
     </Hotkeys>
   );
 };
