@@ -16,6 +16,9 @@ import { ContainerNavigation } from "../components/ContainerNavigation";
 import { EditorStore } from "../store";
 import { EditorActions } from "../store/EditorStore";
 import { NavigationStore } from "../store/NavigationStore";
+import { EmptyPage } from "../components/EmptyPage";
+
+declare var folder;
 
 const AppSwitcherComponent = props => (
   <GlobalItem
@@ -49,10 +52,10 @@ const App = () => {
   const editorDispatch = React.useContext(EditorStore.Dispatch);
 
   const navigationState = React.useContext(NavigationStore.State);
-
+  console.log(folder);
   return (
     <Hotkeys
-      keyName="ctrl+e"
+      keyName="ctrl+e,command+e"
       filter={event => {
         return true;
       }}
@@ -70,10 +73,13 @@ const App = () => {
           globalNavigation={Global}
           productNavigation={ProductNavigation}
           containerNavigation={
-            navigationState.workingDirectory !== "" ? ContainerNavigation : null
+            folder.data.folderTree !== undefined &&
+            folder.data.folderTree !== null
+              ? ContainerNavigation
+              : null
           }
         >
-          <EditorPage isPreview={editorState.isPreview} />
+          {editorState.markdown !== null ? <EditorPage /> : <EmptyPage />}
         </LayoutManager>
       </NavigationProvider>
     </Hotkeys>

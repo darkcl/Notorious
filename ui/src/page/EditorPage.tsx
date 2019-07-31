@@ -5,24 +5,32 @@ import "../style/EditorPage.css";
 
 import { Editor } from "../components/Editor";
 import { CodeBlock } from "../components/CodeBlock";
+import { EmptyPage } from "../components/EmptyPage";
+import { EditorStore } from "../store";
+import { EditorActions } from "../store/EditorStore";
 
-export const EditorPage = props => {
-  const [markdown, setMarkdown] = React.useState(
-    "# Hello World\n\n[google](http://google.com)"
-  );
+export const EditorPage = () => {
+  const editorDispatch = React.useContext(EditorStore.Dispatch);
+  const editorState = React.useContext(EditorStore.State);
+
   return (
     <div className="editor-page-content">
-      {props.isPreview ? (
+      {editorState.isPreview ? (
         <ReactMarkdown
           className="result"
-          source={markdown}
+          source={editorState.markdown}
           renderers={{ code: CodeBlock }}
         />
       ) : (
         <Editor
           className="editor"
-          value={markdown}
-          onChange={value => setMarkdown(value)}
+          value={editorState.markdown}
+          onChange={value =>
+            editorDispatch({
+              type: EditorActions.UPDATE_MARKDOWN,
+              markdown: value
+            })
+          }
         />
       )}
     </div>

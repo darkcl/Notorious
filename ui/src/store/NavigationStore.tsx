@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import { IFile, IFolder } from "../interface/IFolder";
+
 export enum NavigationActions {
   UPDATE_WORKING_DIR = "UPDATE_WORKING_DIR"
 }
@@ -8,16 +10,16 @@ const State = React.createContext(null);
 const Dispatch = React.createContext(null);
 
 interface INavigationState {
-  workingDirectory: string;
+  workingDirectory: IFolder;
 }
 
 const initialState: INavigationState = {
-  workingDirectory: ""
+  workingDirectory: null
 };
 
 type NavigationAction = {
   type: NavigationActions.UPDATE_WORKING_DIR;
-  workingDirectory: string;
+  workingDirectory: IFolder;
 };
 
 function reducer(

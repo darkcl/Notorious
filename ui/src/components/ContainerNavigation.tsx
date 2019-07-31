@@ -18,11 +18,14 @@ import {
 import { gridSize as gridSizeFn } from "@atlaskit/theme";
 import InlineDialog from "@atlaskit/inline-dialog";
 import { NavigationStore, NavigationActions } from "../store/NavigationStore";
+import { EditorStore } from "../store";
+import { EditorActions } from "../store/EditorStore";
+import Spinner from "@atlaskit/spinner";
 
 declare var folder;
 
 export const ContainerNavigation = () => {
-  const navigationDispatcher = React.useContext(NavigationStore.Dispatch);
+  const editorDispatch = React.useContext(EditorStore.Dispatch);
   const gridSize = gridSizeFn();
   return (
     <Fragment>
@@ -36,21 +39,19 @@ export const ContainerNavigation = () => {
       <MenuSection>
         {({ className }) => (
           <div className={className}>
-            <Item
-              text="Dashboard"
-              onClick={() => {
-                navigationDispatcher({
-                  type: NavigationActions.UPDATE_WORKING_DIR,
-                  workingDirectory: ""
-                });
-              }}
-            />
-            <Item text="Read Folder" />
-            <Item text="Settings" />
-            <Separator />
-            <GroupHeading>Add-ons</GroupHeading>
-            {[...Array(50)].map((x, i) => (
-              <Item text={`My plugin #${i}`} />
+            {folder.data.folderTree.files.map(val => (
+              <Item
+                text={val.name}
+                onClick={() => {
+                  console.log("click on file");
+                  folder.open(val.path);
+                  setTimeout(() => {
+                    editorDispatch({
+                      type: EditorActions.RELOAD_FILE
+                    });
+                  }, 100);
+                }}
+              />
             ))}
           </div>
         )}
