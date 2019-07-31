@@ -23,6 +23,8 @@ const render = () =>
 //   folder.render = render;
 // }
 
+folder.render = render;
+
 window.onclick = function(e) {
   const elem = e.target as Element;
   if (elem.localName === "a") {

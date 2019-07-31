@@ -11,8 +11,11 @@ import {
 } from "@atlaskit/navigation-next";
 import { NavigationStore, NavigationActions } from "../store/NavigationStore";
 
+declare var folder;
+
 export const ProductNavigation = () => {
   const navigationDispatcher = React.useContext(NavigationStore.Dispatch);
+  console.log(folder);
   return (
     <Fragment>
       <HeaderSection>
@@ -34,7 +37,7 @@ export const ProductNavigation = () => {
                 });
               }}
             />
-            <Item text="Things" />
+            <Item text="Read Folder" onClick={() => folder.read()} />
             <Item text="Settings" />
             <Separator />
             <GroupHeading>Add-ons</GroupHeading>

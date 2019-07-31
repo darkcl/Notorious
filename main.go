@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/darkcl/Notorious/models"
+	"github.com/darkcl/Notorious/controllers"
 	"github.com/darkcl/Notorious/helpers"
 	"github.com/leaanthony/mewn"
 	webview "github.com/lukevers/webview"
@@ -69,7 +69,7 @@ func main() {
 	defer w.Exit()
 	w.Dispatch(func() {
 		// Inject controller
-		w.Bind("folder", models.NewFolderController(w))
+		w.Bind("folder", controllers.NewFolderController(w))
 	})
 	w.Run()
 }

@@ -19,6 +19,8 @@ import { gridSize as gridSizeFn } from "@atlaskit/theme";
 import InlineDialog from "@atlaskit/inline-dialog";
 import { NavigationStore, NavigationActions } from "../store/NavigationStore";
 
+declare var folder;
+
 export const ContainerNavigation = () => {
   const navigationDispatcher = React.useContext(NavigationStore.Dispatch);
   const gridSize = gridSizeFn();
@@ -43,11 +45,13 @@ export const ContainerNavigation = () => {
                 });
               }}
             />
-            <Item text="Things" />
+            <Item text="Read Folder" />
             <Item text="Settings" />
             <Separator />
             <GroupHeading>Add-ons</GroupHeading>
-            <Item text="My plugin" />
+            {[...Array(50)].map((x, i) => (
+              <Item text={`My plugin #${i}`} />
+            ))}
           </div>
         )}
       </MenuSection>
