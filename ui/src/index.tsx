@@ -6,6 +6,7 @@ import "@atlaskit/css-reset/dist/bundle.css";
 
 import App from "./page/App";
 import { Store } from "./store";
+import { Modal } from "./components/Modal";
 
 declare var external;
 declare var folder;
@@ -14,6 +15,7 @@ const render = () =>
   ReactDOM.render(
     <Store>
       <App />
+      <Modal />
     </Store>,
     document.getElementById("root")
   );

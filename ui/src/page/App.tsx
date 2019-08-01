@@ -13,10 +13,11 @@ import GlobalNavigation from "@atlaskit/global-navigation";
 import { EditorPage } from "./EditorPage";
 import { ProductNavigation } from "../components/ProductNavigation";
 import { ContainerNavigation } from "../components/ContainerNavigation";
-import { EditorStore } from "../store";
+import { EditorStore, ModalStore } from "../store";
 import { EditorActions } from "../store/EditorStore";
 import { NavigationStore } from "../store/NavigationStore";
 import { EmptyPage } from "../components/EmptyPage";
+import { ModalActions } from "../store/ModalStore";
 
 declare var folder;
 
@@ -29,23 +30,28 @@ const AppSwitcherComponent = props => (
   />
 );
 
-const Global = () => (
-  <GlobalNavigation
-    productIcon={EmojiAtlassianIcon}
-    productHref="#"
-    onProductClick={() => console.log("product clicked")}
-    onCreateClick={() => console.log("create clicked")}
-    onSearchClick={() => console.log("search clicked")}
-    onStarredClick={() => console.log("starred clicked")}
-    onHelpClick={() => console.log("help clicked")}
-    helpItems={() => <div />}
-    onNotificationClick={() => console.log("notification clicked")}
-    appSwitcherComponent={AppSwitcherComponent}
-    appSwitcherTooltip="Switch to ..."
-    onSettingsClick={() => console.log("settings clicked")}
-    loginHref="#login"
-  />
-);
+const Global: React.FunctionComponent = () => {
+  const modalDispatch = React.useContext(ModalStore.Dispatch);
+  return (
+    <GlobalNavigation
+      productIcon={EmojiAtlassianIcon}
+      productHref="#"
+      onProductClick={() => console.log("product clicked")}
+      onCreateClick={() =>
+        modalDispatch({ type: ModalActions.SHOW_FILE_MODAL })
+      }
+      onSearchClick={() => console.log("search clicked")}
+      onStarredClick={() => console.log("starred clicked")}
+      onHelpClick={() => console.log("help clicked")}
+      helpItems={() => <div />}
+      onNotificationClick={() => console.log("notification clicked")}
+      appSwitcherComponent={AppSwitcherComponent}
+      appSwitcherTooltip="Switch to ..."
+      onSettingsClick={() => console.log("settings clicked")}
+      loginHref="#login"
+    />
+  );
+};
 
 const App = () => {
   const editorState = React.useContext(EditorStore.State);

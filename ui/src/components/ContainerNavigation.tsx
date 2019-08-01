@@ -43,7 +43,6 @@ export const ContainerNavigation = () => {
               <Item
                 text={val.name}
                 onClick={() => {
-                  console.log("click on file");
                   folder.open(val.path);
                   setTimeout(() => {
                     editorDispatch({
