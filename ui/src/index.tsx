@@ -7,6 +7,7 @@ import "@atlaskit/css-reset/dist/bundle.css";
 import App from "./page/App";
 import { Store } from "./store";
 import { Modal } from "./components/Modal";
+import { FlagGroupComponent } from "./components/FlagGroupComponent";
 
 declare var external;
 declare var folder;
@@ -16,6 +17,7 @@ const render = () =>
     <Store>
       <App />
       <Modal />
+      <FlagGroupComponent />
     </Store>,
     document.getElementById("root")
   );

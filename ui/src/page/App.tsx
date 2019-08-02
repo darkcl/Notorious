@@ -18,6 +18,7 @@ import { EditorActions } from "../store/EditorStore";
 import { NavigationStore } from "../store/NavigationStore";
 import { EmptyPage } from "../components/EmptyPage";
 import { ModalActions } from "../store/ModalStore";
+import { FlagStore, FlagActions } from "../store/FlagStore";
 
 declare var folder;
 
@@ -32,6 +33,8 @@ const AppSwitcherComponent = props => (
 
 const Global: React.FunctionComponent = () => {
   const modalDispatch = React.useContext(ModalStore.Dispatch);
+
+  const flagDispatch = React.useContext(FlagStore.Dispatch);
   return (
     <GlobalNavigation
       productIcon={EmojiAtlassianIcon}
@@ -40,7 +43,13 @@ const Global: React.FunctionComponent = () => {
       onCreateClick={() =>
         modalDispatch({ type: ModalActions.SHOW_FILE_MODAL })
       }
-      onSearchClick={() => console.log("search clicked")}
+      onSearchClick={() => {
+        console.log("search click");
+        flagDispatch({
+          type: FlagActions.SHOW_MESSAGE,
+          message: "testing"
+        });
+      }}
       onStarredClick={() => console.log("starred clicked")}
       onHelpClick={() => console.log("help clicked")}
       helpItems={() => <div />}
@@ -57,7 +66,6 @@ const App = () => {
   const editorState = React.useContext(EditorStore.State);
   const editorDispatch = React.useContext(EditorStore.Dispatch);
 
-  const navigationState = React.useContext(NavigationStore.State);
   console.log(folder);
   return (
     <Hotkeys

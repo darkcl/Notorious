@@ -9,9 +9,9 @@
     "watch": "webpack --watch --mode development"
   },
   "devDependencies": {
+    "@types/node": "^12.6.9",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.5",
-    "@types/styled-components": "^4.1.18",
     "awesome-typescript-loader": "^5.2.1",
     "css-loader": "^3.1.0",
     "file-loader": "^4.1.0",
@@ -27,6 +27,7 @@
   "dependencies": {
     "@atlaskit/css-reset": "^5.0.4",
     "@atlaskit/empty-state": "^5.0.3",
+    "@atlaskit/flag": "^12.0.15",
     "@atlaskit/global-navigation": "^7.3.6",
     "@atlaskit/icon": "^19.0.1",
     "@atlaskit/inline-dialog": "^12.0.10",
@@ -43,6 +44,6 @@
     "react-split-pane": "^0.1.87",
     "react-syntax-highlighter": "^11.0.2",
     "showdown": "^1.9.0",
-    "styled-components": "^4.3.2"
+    "styled-components": "^3.2.6"
   }
 }
