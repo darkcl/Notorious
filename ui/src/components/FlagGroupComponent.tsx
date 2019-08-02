@@ -27,6 +27,7 @@ export const FlagGroupComponent: React.FunctionComponent = () => {
         <Flag
           id={flag.id}
           key={flag.id}
+          actions={actions}
           icon={null}
           title="Flag Title"
           description="Flag description"
