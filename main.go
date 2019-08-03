@@ -12,6 +12,7 @@ import (
 	"github.com/darkcl/Notorious/helpers"
 	"github.com/leaanthony/mewn"
 	webview "github.com/lukevers/webview"
+	"github.com/mitchellh/go-homedir"
 )
 
 func handleRPC(w webview.WebView, data string) {
@@ -25,10 +26,29 @@ func handleRPC(w webview.WebView, data string) {
 	default:
 		panic("Not Implemented")
 	}
+}
 
+func setupSettings() {
+	path, err := homedir.Dir()
+
+	if err != nil {
+		panic(err)
+	}
+
+	settingFolder := filepath.Join(path, ".notorious")
+
+	if _, err := os.Stat(settingFolder); os.IsNotExist(err) {
+		os.Mkdir(settingFolder, os.ModePerm)
+	}
+
+	if err != nil {
+		panic(err)
+	}
 }
 
 func main() {
+	setupSettings()
+
 	js := mewn.String("./ui/dist/bundle.min.js")
 	indexHTML := mewn.String("./ui/dist/index.html")
 
