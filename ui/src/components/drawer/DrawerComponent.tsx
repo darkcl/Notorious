@@ -18,7 +18,7 @@ export const DrawerComponent: React.FunctionComponent = () => {
       onClose={onClose}
       onCloseComplete={onCloseComplete}
       isOpen={!drawerState.isHidden}
-      width="wide"
+      width="narrow"
     >
       <CreateDrawer />
     </Drawer>

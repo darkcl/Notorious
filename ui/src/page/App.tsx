@@ -42,9 +42,7 @@ const Global: React.FunctionComponent = () => {
       productIcon={EmojiAtlassianIcon}
       productHref="#"
       onProductClick={() => console.log("product clicked")}
-      onCreateClick={() =>
-        modalDispatch({ type: ModalActions.SHOW_FILE_MODAL })
-      }
+      onCreateClick={() => drawerDispatch({ type: DrawerActions.SHOW })}
       onSearchClick={() => {
         console.log("search click");
         flagDispatch({
@@ -54,7 +52,6 @@ const Global: React.FunctionComponent = () => {
       }}
       onStarredClick={() => {
         console.log("starred clicked");
-        drawerDispatch({ type: DrawerActions.SHOW });
       }}
       onHelpClick={() => console.log("help clicked")}
       helpItems={() => <div />}
