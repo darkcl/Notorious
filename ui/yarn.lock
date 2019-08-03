@@ -26,6 +26,14 @@
     "@babel/runtime" "^7.0.0"
     prop-types "^15.5.10"
 
+"@atlaskit/analytics@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@atlaskit/analytics/-/analytics-6.0.1.tgz#397abcf7c835269ff90ac50463ad12453f0bcc19"
+  integrity sha512-s6eC2hPXP5gjmI3T4yT0RAYjaPPB+M8Ohq45YtSgI6FE2wtLkzVfttLV9msga7qwpc42+HL0NffydUz1tBDbKg==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    prop-types "^15.5.10"
+
 "@atlaskit/atlassian-switcher@^3.8.2":
   version "3.11.0"
   resolved "https://registry.yarnpkg.com/@atlaskit/atlassian-switcher/-/atlassian-switcher-3.11.0.tgz#ce28c0492e4642ead33faf66e882095e2fab0e83"
@@ -100,6 +108,19 @@
     "@babel/runtime" "^7.0.0"
     "@emotion/core" "^10.0.9"
     memoize-one "^3.0.1"
+    tslib "^1.9.3"
+
+"@atlaskit/checkbox@^9.0.4":
+  version "9.0.4"
+  resolved "https://registry.yarnpkg.com/@atlaskit/checkbox/-/checkbox-9.0.4.tgz#e9309f737494ee0e697c35ea89efc058065e4fd8"
+  integrity sha512-l0La1HAn4Lu5oD1BCkQ/+Qbw0s//vVhl19+9EmbekYHf2iJFwlgMXl0seYBnj8XkKNBVxJJ+7l9Rgv1QDjtFqg==
+  dependencies:
+    "@atlaskit/analytics-next" "^5.1.2"
+    "@atlaskit/icon" "^19.0.0"
+    "@atlaskit/theme" "^9.1.0"
+    "@babel/runtime" "^7.0.0"
+    "@emotion/core" "^10.0.9"
+    emotion-theming "^10.0.7"
     tslib "^1.9.3"
 
 "@atlaskit/code@^11.0.1":
@@ -378,6 +399,34 @@
     shallow-equal "^1.0.0"
     unstated "^1.2.0"
 
+"@atlaskit/navigation@^35.1.12":
+  version "35.1.12"
+  resolved "https://registry.yarnpkg.com/@atlaskit/navigation/-/navigation-35.1.12.tgz#01ba30b8b0ac5cb5ce28e62a86d8a99cbd78594e"
+  integrity sha512-D/pQdckjcp3MPD4l5YOzeRi4goadUGLsq3/LTBiqj+h4SC9K/c88Ezxu8Wia2G50pFRyjjVEEogj7IhjpY3inA==
+  dependencies:
+    "@atlaskit/analytics" "^6.0.1"
+    "@atlaskit/analytics-next" "^5.1.2"
+    "@atlaskit/avatar" "^16.0.8"
+    "@atlaskit/blanket" "^10.0.7"
+    "@atlaskit/checkbox" "^9.0.4"
+    "@atlaskit/dropdown-menu" "^8.0.11"
+    "@atlaskit/icon" "^19.0.0"
+    "@atlaskit/item" "^10.0.5"
+    "@atlaskit/polyfills" "^4.0.1"
+    "@atlaskit/size-detector" "^8.0.1"
+    "@atlaskit/theme" "^9.1.1"
+    "@atlaskit/tooltip" "^15.0.5"
+    "@babel/runtime" "^7.0.0"
+    chromatism "^2.6.0"
+    es6-object-assign "^1.1.0"
+    keycode "^2.1.7"
+    lodash.clonedeep "^4.5.0"
+    memoize-one "^3.0.1"
+    prop-types "^15.5.10"
+    raf-schd "^2.1.0"
+    react-scrolllock "^3.0.2"
+    react-transition-group "^2.2.1"
+
 "@atlaskit/notification-indicator@^7.0.4":
   version "7.0.4"
   resolved "https://registry.yarnpkg.com/@atlaskit/notification-indicator/-/notification-indicator-7.0.4.tgz#172a7cfafa3ed77aafe02be8c0ad48106b4e4575"
@@ -395,6 +444,13 @@
   dependencies:
     "@atlaskit/util-service-support" "^4.0.5"
     tslib "^1.9.3"
+
+"@atlaskit/polyfills@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@atlaskit/polyfills/-/polyfills-4.0.1.tgz#697e959c385069f72295310492412157b3972ab0"
+  integrity sha512-0l/UiO8uYFZqNBx9JwKaTBbGTKGT1tfxrz1m09ma9/46IhCRu4i5XN05NwGDMN4WKtCtmPZ1yf7KWrcfSUOAsA==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
 
 "@atlaskit/popper@^3.0.1":
   version "3.0.1"
@@ -445,6 +501,14 @@
     react-select "^3.0.4"
     react-transition-group "^2.2.1"
     shallow-equal "^1.0.0"
+
+"@atlaskit/size-detector@^8.0.1":
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/@atlaskit/size-detector/-/size-detector-8.0.1.tgz#1243a6775cea6cb579e52583a4356634bab53941"
+  integrity sha512-bxan4tsquOawAs3nWYEeIAY5oySprowsGWPIphZ5QAt1Y7mmsDtOuA+WYL4ozc4gIu47AwN6keqKPovpheHGig==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    raf-schd "^2.1.0"
 
 "@atlaskit/spinner@^12.0.1", "@atlaskit/spinner@^12.0.5":
   version "12.0.5"
@@ -2141,6 +2205,11 @@ es6-iterator@~2.0.3:
     es5-ext "^0.10.35"
     es6-symbol "^3.1.1"
 
+es6-object-assign@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/es6-object-assign/-/es6-object-assign-1.1.0.tgz#c2c3582656247c39ea107cb1e6652b6f9f24523c"
+  integrity sha1-wsNYJlYkfDnqEHyx5mUrb58kUjw=
+
 es6-symbol@^3.1.1, es6-symbol@~3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/es6-symbol/-/es6-symbol-3.1.1.tgz#bf00ef4fdab6ba1b46ecb7b629b4c7ed5715cc77"
@@ -3291,6 +3360,11 @@ lodash.camelcase@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
   integrity sha1-soqmKIorn8ZRA1x3EfZathkDMaY=
+
+lodash.clonedeep@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
+  integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
 
 lodash.isequal@^4.5.0:
   version "4.5.0"

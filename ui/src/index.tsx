@@ -8,7 +8,7 @@ import App from "./page/App";
 import { Store } from "./store";
 import { Modal } from "./components/Modal";
 import { FlagGroupComponent } from "./components/FlagGroupComponent";
-import { DrawerComponent } from "./components/DrawerComponent";
+import { DrawerComponent } from "./components/drawer/DrawerComponent";
 
 declare var external;
 declare var folder;

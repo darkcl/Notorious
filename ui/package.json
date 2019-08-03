@@ -33,6 +33,7 @@
     "@atlaskit/icon": "^19.0.1",
     "@atlaskit/inline-dialog": "^12.0.10",
     "@atlaskit/modal-dialog": "^10.1.1",
+    "@atlaskit/navigation": "^35.1.12",
     "@atlaskit/navigation-next": "^6.3.8",
     "@atlaskit/spinner": "^12.0.5",
     "@atlaskit/theme": "^9.1.2",

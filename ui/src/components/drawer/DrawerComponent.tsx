@@ -1,6 +1,7 @@
 import * as React from "react";
 import Drawer from "@atlaskit/drawer";
-import { DrawerStore, DrawerActions } from "../store/DrawerStore";
+import { DrawerStore, DrawerActions } from "../../store/DrawerStore";
+import { CreateDrawer } from "./CreateDrawer";
 
 export const DrawerComponent: React.FunctionComponent = () => {
   const drawerState = React.useContext(DrawerStore.State);
@@ -19,7 +20,7 @@ export const DrawerComponent: React.FunctionComponent = () => {
       isOpen={!drawerState.isHidden}
       width="wide"
     >
-      <h1>Some Drawer</h1>
+      <CreateDrawer />
     </Drawer>
   );
 };
