@@ -58,7 +58,10 @@ const Global: React.FunctionComponent = () => {
       onNotificationClick={() => console.log("notification clicked")}
       appSwitcherComponent={AppSwitcherComponent}
       appSwitcherTooltip="Switch to ..."
-      onSettingsClick={() => console.log("settings clicked")}
+      onSettingsClick={() => {
+        console.log("settings clicked");
+        modalDispatch({ type: ModalActions.SHOW_SETTINGS_MODAL });
+      }}
       loginHref="#login"
     />
   );

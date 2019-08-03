@@ -6,12 +6,13 @@ import "@atlaskit/css-reset/dist/bundle.css";
 
 import App from "./page/App";
 import { Store } from "./store";
-import { Modal } from "./components/Modal";
+import { Modal } from "./components/modal/Modal";
 import { FlagGroupComponent } from "./components/FlagGroupComponent";
 import { DrawerComponent } from "./components/drawer/DrawerComponent";
 
 declare var external;
 declare var folder;
+declare var settings;
 
 const render = () =>
   ReactDOM.render(
@@ -29,7 +30,20 @@ const render = () =>
 //   folder.render = render;
 // }
 
+/*
+{
+  "lastOpenFile": "",
+  "lastOpenWorkspace": "",
+  "jira": {
+    "baseUrl": "",
+    "user": "",
+    "accessToken": ""
+  }
+}
+*/
+
 folder.render = render;
+settings.render = render;
 
 window.onclick = function(e) {
   const elem = e.target as Element;

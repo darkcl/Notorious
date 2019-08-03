@@ -15,6 +15,8 @@ import (
 	"github.com/mitchellh/go-homedir"
 )
 
+var settingPath string
+
 func handleRPC(w webview.WebView, data string) {
 	switch {
 	case strings.HasPrefix(data, "editor.onChange: "):
@@ -35,10 +37,10 @@ func setupSettings() {
 		panic(err)
 	}
 
-	settingFolder := filepath.Join(path, ".notorious")
+	settingPath = filepath.Join(path, ".notorious")
 
-	if _, err := os.Stat(settingFolder); os.IsNotExist(err) {
-		os.Mkdir(settingFolder, os.ModePerm)
+	if _, err := os.Stat(settingPath); os.IsNotExist(err) {
+		os.Mkdir(settingPath, os.ModePerm)
 	}
 
 	if err != nil {
@@ -90,6 +92,7 @@ func main() {
 	w.Dispatch(func() {
 		// Inject controller
 		w.Bind("folder", controllers.NewFolderController(w))
+		w.Bind("settings", controllers.NewSettingsController())
 	})
 	w.Run()
 }
