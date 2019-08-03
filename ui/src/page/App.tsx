@@ -19,6 +19,7 @@ import { NavigationStore } from "../store/NavigationStore";
 import { EmptyPage } from "../components/EmptyPage";
 import { ModalActions } from "../store/ModalStore";
 import { FlagStore, FlagActions } from "../store/FlagStore";
+import { DrawerStore, DrawerActions } from "../store/DrawerStore";
 
 declare var folder;
 
@@ -33,8 +34,9 @@ const AppSwitcherComponent = props => (
 
 const Global: React.FunctionComponent = () => {
   const modalDispatch = React.useContext(ModalStore.Dispatch);
-
+  const drawerDispatch = React.useContext(DrawerStore.Dispatch);
   const flagDispatch = React.useContext(FlagStore.Dispatch);
+
   return (
     <GlobalNavigation
       productIcon={EmojiAtlassianIcon}
@@ -50,7 +52,10 @@ const Global: React.FunctionComponent = () => {
           message: "testing"
         });
       }}
-      onStarredClick={() => console.log("starred clicked")}
+      onStarredClick={() => {
+        console.log("starred clicked");
+        drawerDispatch({ type: DrawerActions.SHOW });
+      }}
       onHelpClick={() => console.log("help clicked")}
       helpItems={() => <div />}
       onNotificationClick={() => console.log("notification clicked")}

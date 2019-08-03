@@ -8,6 +8,7 @@ import App from "./page/App";
 import { Store } from "./store";
 import { Modal } from "./components/Modal";
 import { FlagGroupComponent } from "./components/FlagGroupComponent";
+import { DrawerComponent } from "./components/DrawerComponent";
 
 declare var external;
 declare var folder;
@@ -18,6 +19,7 @@ const render = () =>
       <App />
       <Modal />
       <FlagGroupComponent />
+      <DrawerComponent />
     </Store>,
     document.getElementById("root")
   );

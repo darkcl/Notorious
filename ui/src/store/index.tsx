@@ -4,12 +4,14 @@ import { EditorStore } from "./EditorStore";
 import { NavigationStore } from "./NavigationStore";
 import { ModalStore } from "./ModalStore";
 import { FlagStore } from "./FlagStore";
+import { DrawerStore } from "./DrawerStore";
 
 const providers = [
   <EditorStore.Provider />,
   <NavigationStore.Provider />,
   <ModalStore.Provider />,
-  <FlagStore.Provider />
+  <FlagStore.Provider />,
+  <DrawerStore.Provider />
 ];
 
 const Store = ({ children: initial }) =>
