@@ -5,6 +5,7 @@ import { ModalStore } from "../../store";
 import { ModalType, ModalActions } from "../../store/ModalStore";
 
 import { SettingsModal } from "./SettingsModal";
+import { CreateFileModal } from "./CreateFileModal";
 
 export const Modal: React.FunctionComponent = () => {
   const modalState = React.useContext(ModalStore.State);
@@ -25,6 +26,9 @@ export const Modal: React.FunctionComponent = () => {
     switch (type) {
       case ModalType.Settings: {
         return <SettingsModal />;
+      }
+      case ModalType.File: {
+        return <CreateFileModal />;
       }
       default: {
         return (

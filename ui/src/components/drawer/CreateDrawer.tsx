@@ -5,6 +5,8 @@ import IssuesIcon from "@atlaskit/icon/glyph/issues";
 
 import { DrawerItemGroup, DrawerItem } from "@atlaskit/drawer";
 import { DrawerStore, DrawerActions } from "../../store/DrawerStore";
+import { ModalStore } from "../../store";
+import { ModalActions } from "../../store/ModalStore";
 
 const commonProps = () => {
   const drawerDispatch = React.useContext(DrawerStore.Dispatch);
@@ -22,6 +24,7 @@ const commonProps = () => {
 
 export const CreateDrawer: React.FunctionComponent = () => {
   const drawerDispatch = React.useContext(DrawerStore.Dispatch);
+  const modalDispatch = React.useContext(ModalStore.Dispatch);
   return (
     <React.Fragment>
       <DrawerItemGroup title="Workspace">
@@ -32,6 +35,12 @@ export const CreateDrawer: React.FunctionComponent = () => {
           Create Workspace
         </DrawerItem>
         <DrawerItem
+          onClick={() => {
+            modalDispatch({
+              type: ModalActions.SHOW_FILE_MODAL
+            });
+            drawerDispatch({ type: DrawerActions.DISMISS });
+          }}
           {...commonProps}
           elemBefore={(<FileIcon label="File icon" /> as unknown) as Node}
         >

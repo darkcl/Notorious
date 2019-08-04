@@ -4,6 +4,7 @@ export enum ModalActions {
   SHOW_FILE_MODAL = "SHOW_FILE_MODAL",
   SHOW_SETTINGS_MODAL = "SHOW_SETTINGS_MODAL",
   SUBMIT_SETTINGS = "SUBMIT_SETTINGS",
+  SUBMIT_CREATE_FILE = "SUBMIT_CREATE_FILE",
   DISMISS = "DISMISS"
 }
 
@@ -28,6 +29,7 @@ type ModalAction =
   | { type: ModalActions.SHOW_FILE_MODAL }
   | { type: ModalActions.SHOW_SETTINGS_MODAL }
   | { type: ModalActions.SUBMIT_SETTINGS; settings: string }
+  | { type: ModalActions.SUBMIT_CREATE_FILE; file: string }
   | { type: ModalActions.DISMISS };
 
 declare var settings;
@@ -47,6 +49,13 @@ function reducer(state: IModalState, action: ModalAction): IModalState {
       };
     case ModalActions.SUBMIT_SETTINGS: {
       settings.updateSettings(action.settings);
+      return {
+        ...state,
+        modalType: ModalType.None
+      };
+    }
+    case ModalActions.SUBMIT_CREATE_FILE: {
+      // Create file
       return {
         ...state,
         modalType: ModalType.None
