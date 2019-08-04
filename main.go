@@ -48,8 +48,23 @@ func setupSettings() {
 	}
 }
 
+func setupWorkspace() {
+	path, err := homedir.Dir()
+
+	if err != nil {
+		panic(err)
+	}
+
+	defaultWorkspace := filepath.Join(path, ".notorious", "default")
+
+	if _, err := os.Stat(defaultWorkspace); os.IsNotExist(err) {
+		os.Mkdir(defaultWorkspace, os.ModePerm)
+	}
+}
+
 func main() {
 	setupSettings()
+	setupWorkspace()
 
 	js := mewn.String("./ui/dist/bundle.min.js")
 	indexHTML := mewn.String("./ui/dist/index.html")

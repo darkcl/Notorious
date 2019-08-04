@@ -1,5 +1,7 @@
 import * as React from "react";
 import BoardIcon from "@atlaskit/icon/glyph/board";
+import FileIcon from "@atlaskit/icon/glyph/file";
+import IssuesIcon from "@atlaskit/icon/glyph/issues";
 
 import { DrawerItemGroup, DrawerItem } from "@atlaskit/drawer";
 import { DrawerStore, DrawerActions } from "../../store/DrawerStore";
@@ -31,7 +33,7 @@ export const CreateDrawer: React.FunctionComponent = () => {
         </DrawerItem>
         <DrawerItem
           {...commonProps}
-          elemBefore={(<BoardIcon label="Board icon" /> as unknown) as Node}
+          elemBefore={(<FileIcon label="File icon" /> as unknown) as Node}
         >
           Create Notes
         </DrawerItem>
@@ -39,7 +41,7 @@ export const CreateDrawer: React.FunctionComponent = () => {
       <DrawerItemGroup title="JIRA">
         <DrawerItem
           {...commonProps}
-          elemBefore={(<BoardIcon label="Board icon" /> as unknown) as Node}
+          elemBefore={(<IssuesIcon label="Issue icon" /> as unknown) as Node}
         >
           Track Issue
         </DrawerItem>

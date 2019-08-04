@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -10,6 +11,7 @@ import (
 
 	"github.com/darkcl/Notorious/models"
 	"github.com/lukevers/webview"
+	"github.com/mitchellh/go-homedir"
 )
 
 // FolderController - Folder Controller
@@ -22,15 +24,25 @@ type FolderController struct {
 
 // NewFolderController - Create New Folder Controller
 func NewFolderController(webView webview.WebView) *FolderController {
+	path, err := homedir.Dir()
+
+	if err != nil {
+		panic(err)
+	}
+	settingPath := filepath.Join(path, ".notorious")
+	folders := buildTree(settingPath)
+	data, _ := json.Marshal(folders)
+	fmt.Print(string(data))
 	return &FolderController{
 		webView: webView,
+		Folder:  folders,
 	}
 }
 
 // Read - Open folder picker and read as file tree
 func (f *FolderController) Read() {
 	dir := f.webView.Dialog(webview.DialogTypeOpen, webview.DialogFlagDirectory, "Open directory", "")
-	f.Folder = f.buildTree(dir)
+	f.Folder = buildTree(dir)
 }
 
 // Clear - clear current folder tree
@@ -60,15 +72,17 @@ func (f *FolderController) Save(content string) {
 	f.CurrentContent = content
 }
 
-func (f *FolderController) buildTree(dir string) *models.Folder {
+func buildTree(dir string) *models.Folder {
 	dir = path.Clean(dir)
 	var tree *models.Folder
 	var nodes = map[string]interface{}{}
 	var walkFun filepath.WalkFunc = func(p string, info os.FileInfo, err error) error {
 		if info.IsDir() {
-			nodes[p] = &models.Folder{Name: path.Base(p), Files: []*models.File{}, Folders: map[string]*models.Folder{}, Path: p}
+			nodes[p] = &models.Folder{Name: path.Base(p), Files: []*models.File{}, Folders: []*models.Folder{}, Path: p}
 		} else {
-			nodes[p] = &models.File{Name: path.Base(p), Path: p}
+			if filepath.Ext(p) == "md" {
+				nodes[p] = &models.File{Name: path.Base(p), Path: p}
+			}
 		}
 		return nil
 	}
@@ -90,7 +104,7 @@ func (f *FolderController) buildTree(dir string) *models.Folder {
 		case *models.File:
 			parentFolder.Files = append(parentFolder.Files, v)
 		case *models.Folder:
-			parentFolder.Folders[v.Name] = v
+			parentFolder.Folders = append(parentFolder.Folders, v)
 		}
 	}
 

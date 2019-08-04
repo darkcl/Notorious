@@ -11,28 +11,26 @@ import {
   MenuSection,
   Item,
   Separator,
-  ContainerHeader,
-  ItemAvatar,
   Wordmark
 } from "@atlaskit/navigation-next";
 import { gridSize as gridSizeFn } from "@atlaskit/theme";
 import InlineDialog from "@atlaskit/inline-dialog";
-import { NavigationStore, NavigationActions } from "../store/NavigationStore";
+import { NavigationActions } from "../store/NavigationStore";
 import { EditorStore } from "../store";
 import { EditorActions } from "../store/EditorStore";
 import Spinner from "@atlaskit/spinner";
+import { WorkspaceSwitcher } from "./WorkspaceSwitcher";
 
 declare var folder;
 
 export const ContainerNavigation = () => {
   const editorDispatch = React.useContext(EditorStore.Dispatch);
-  const gridSize = gridSizeFn();
   return (
     <Fragment>
       <HeaderSection>
         {({ className }) => (
           <div className={className}>
-            <Wordmark wordmark={AtlassianWordmark} />
+            <WorkspaceSwitcher />
           </div>
         )}
       </HeaderSection>

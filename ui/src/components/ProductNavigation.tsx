@@ -37,7 +37,7 @@ export const ProductNavigation = () => {
                 });
               }}
             />
-            <Item text="Read Folder" onClick={() => folder.read()} />
+            <Item text="Read Folder" />
             <Item text="Settings" />
             <Separator />
             <GroupHeading>Add-ons</GroupHeading>

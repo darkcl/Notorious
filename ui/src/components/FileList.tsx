@@ -15,7 +15,7 @@ class FileList extends React.Component<{}, {}> {
           files:
           {folder.data.files ? folder.data.files.count : "==not read=="}
         </div>
-        <button onClick={() => folder.read("~/go/bin")}>Read file</button>
+        <button onClick={() => console.log("click")}>Read file</button>
       </div>
     );
   }

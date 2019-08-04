@@ -2,10 +2,10 @@ package models
 
 // Folder - Describe current folder structure
 type Folder struct {
-	Name    string             `json:"name"`
-	Files   []*File            `json:"files"`
-	Folders map[string]*Folder `json:"folders"`
-	Path    string             `json:"path"`
+	Name    string    `json:"name"`
+	Files   []*File   `json:"files"`
+	Folders []*Folder `json:"folders"`
+	Path    string    `json:"path"`
 }
 
 // File - Describe current file info

@@ -2,12 +2,14 @@ import * as React from "react";
 import Button from "@atlaskit/button";
 import EmptyState from "@atlaskit/empty-state";
 
+import emptyImage from "../../static/img/empty.png";
+
 const primaryAction = (
   <Button
     appearance="primary"
     onClick={() => console.log("primary action clicked")}
   >
-    Open...
+    Create Notes
   </Button>
 );
 
@@ -28,9 +30,10 @@ const tertiaryAction = (
 );
 
 const props = {
-  header: "Select a folder",
-  description: `Select a folder storing your notes`,
-  primaryAction
+  header: "You don't have any notes yet",
+  description: `Create your first note`,
+  primaryAction,
+  imageUrl: emptyImage
 };
 
 export const EmptyPage: React.FunctionComponent = () => {

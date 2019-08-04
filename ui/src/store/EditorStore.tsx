@@ -7,6 +7,7 @@ export enum EditorActions {
 }
 
 declare var folder;
+declare var settings;
 
 const State = React.createContext(null);
 const Dispatch = React.createContext(null);
@@ -14,11 +15,15 @@ const Dispatch = React.createContext(null);
 interface IEditorState {
   isPreview: boolean;
   markdown: string;
+  currentWorkspace: string;
+  currentFile: string;
 }
 
 const initialState: IEditorState = {
   isPreview: false,
-  markdown: null
+  markdown: null,
+  currentWorkspace: settings.data.settings.lastOpenWorkspace,
+  currentFile: settings.data.settings.lastOpenFile
 };
 
 type Action =
@@ -32,6 +37,11 @@ type Action =
 
 function reducer(state: IEditorState, action: Action): IEditorState {
   console.log("reducer:", state, action);
+  const goState = {
+    ...state,
+    currentWorkspace: settings.data.settings.lastOpenWorkspace,
+    currentFile: settings.data.settings.lastOpenFile
+  };
   switch (action.type) {
     case EditorActions.UPDATE_EDITOR_MODE:
       if (action.isPreview && state.markdown !== folder.data.currentContent) {
@@ -39,17 +49,17 @@ function reducer(state: IEditorState, action: Action): IEditorState {
       }
 
       return {
-        ...state,
+        ...goState,
         isPreview: action.isPreview
       };
     case EditorActions.RELOAD_FILE:
       return {
-        ...state,
+        ...goState,
         markdown: folder.data.currentContent || null
       };
     case EditorActions.UPDATE_MARKDOWN:
       return {
-        ...state,
+        ...goState,
         markdown: action.markdown
       };
     default:

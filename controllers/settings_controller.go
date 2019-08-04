@@ -29,7 +29,7 @@ func NewSettingsController() *SettingsController {
 	if _, err := os.Stat(settingPath); os.IsNotExist(err) {
 		settings = &models.Settings{
 			LastOpenFile:      "",
-			LastOpenWorkspace: "",
+			LastOpenWorkspace: "default",
 			JiraSettings: &models.Jira{
 				BaseURL:     "",
 				UserName:    "",

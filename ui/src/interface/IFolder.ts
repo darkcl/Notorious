@@ -1,5 +1,5 @@
 export interface IFolder {
-  folders: { [key: string]: IFolder };
+  folders: IFolder[];
   files: IFile[];
   name: string;
   path: string;
