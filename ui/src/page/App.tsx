@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useReducer, useContext } from "react";
-import EmojiAtlassianIcon from "@atlaskit/icon/glyph/emoji/atlassian";
+import Icon from "@atlaskit/icon";
 import Hotkeys from "react-hot-keys";
 import {
   GlobalItem,
@@ -21,6 +21,8 @@ import { ModalActions } from "../store/ModalStore";
 import { FlagStore, FlagActions } from "../store/FlagStore";
 import { DrawerStore, DrawerActions } from "../store/DrawerStore";
 
+import { AppIcon } from "../components/AppIcon";
+
 declare var folder;
 
 const AppSwitcherComponent = props => (
@@ -39,7 +41,7 @@ const Global: React.FunctionComponent = () => {
 
   return (
     <GlobalNavigation
-      productIcon={EmojiAtlassianIcon}
+      productIcon={AppIcon}
       productHref="#"
       onProductClick={() => console.log("product clicked")}
       onCreateClick={() => drawerDispatch({ type: DrawerActions.SHOW })}

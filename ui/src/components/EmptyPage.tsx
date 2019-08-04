@@ -4,6 +4,8 @@ import EmptyState from "@atlaskit/empty-state";
 
 import emptyImage from "../../static/img/empty.png";
 
+console.log(emptyImage);
+
 const primaryAction = (
   <Button
     appearance="primary"

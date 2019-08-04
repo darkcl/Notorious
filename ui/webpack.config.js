@@ -25,8 +25,12 @@ module.exports = {
         loader: "file-loader?name=./static/fonts/[name]-[hash].[ext]"
       },
       {
+        test: /\.(svg)$/i,
+        loader: "svg-inline-loader"
+      },
+      {
         test: /\.(png|jpg|gif)$/,
-        loader: "url-loader?limit=8192&name=./static/img/[hash].[ext]"
+        loader: "url-loader?limit=8192"
       },
       {
         test: /\.tsx?$/,

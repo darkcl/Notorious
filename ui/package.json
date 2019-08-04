@@ -49,6 +49,7 @@
     "react-split-pane": "^0.1.87",
     "react-syntax-highlighter": "^11.0.2",
     "showdown": "^1.9.0",
-    "styled-components": "^3.2.6"
+    "styled-components": "^3.2.6",
+    "svg-inline-loader": "^0.8.0"
   }
 }
