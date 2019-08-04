@@ -1,7 +1,6 @@
 {
   "exclude": ["./webpack.config.js", "./dist/*"],
   "compilerOptions": {
-    "esModuleInterop": true,
     "types": ["react", "node"],
     "sourceMap": true,
     "noImplicitAny": false,

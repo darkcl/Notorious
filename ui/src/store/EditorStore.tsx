@@ -15,15 +15,11 @@ const Dispatch = React.createContext(null);
 interface IEditorState {
   isPreview: boolean;
   markdown: string;
-  currentWorkspace: string;
-  currentFile: string;
 }
 
 const initialState: IEditorState = {
   isPreview: false,
-  markdown: null,
-  currentWorkspace: settings.data.settings.lastOpenWorkspace,
-  currentFile: settings.data.settings.lastOpenFile
+  markdown: null
 };
 
 type Action =
@@ -39,8 +35,7 @@ function reducer(state: IEditorState, action: Action): IEditorState {
   console.log("reducer:", state, action);
   const goState = {
     ...state,
-    currentWorkspace: settings.data.settings.lastOpenWorkspace,
-    currentFile: settings.data.settings.lastOpenFile
+    markdown: folder.data.currentContent || null
   };
   switch (action.type) {
     case EditorActions.UPDATE_EDITOR_MODE:
@@ -54,7 +49,7 @@ function reducer(state: IEditorState, action: Action): IEditorState {
       };
     case EditorActions.RELOAD_FILE:
       return {
-        ...goState,
+        ...state,
         markdown: folder.data.currentContent || null
       };
     case EditorActions.UPDATE_MARKDOWN:

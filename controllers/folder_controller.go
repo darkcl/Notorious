@@ -52,6 +52,7 @@ func (f *FolderController) Clear() {
 
 // Open - open a file with path
 func (f *FolderController) Open(path string) {
+
 	data, err := ioutil.ReadFile(path) // just pass the file name
 	if err != nil {
 		fmt.Print(err)
@@ -80,7 +81,7 @@ func buildTree(dir string) *models.Folder {
 		if info.IsDir() {
 			nodes[p] = &models.Folder{Name: path.Base(p), Files: []*models.File{}, Folders: []*models.Folder{}, Path: p}
 		} else {
-			if filepath.Ext(p) == "md" {
+			if filepath.Ext(p) == ".md" {
 				nodes[p] = &models.File{Name: path.Base(p), Path: p}
 			}
 		}

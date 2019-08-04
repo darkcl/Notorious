@@ -71,7 +71,6 @@ const App = () => {
   const editorState = React.useContext(EditorStore.State);
   const editorDispatch = React.useContext(EditorStore.Dispatch);
 
-  console.log(folder);
   return (
     <Hotkeys
       keyName="ctrl+e,command+e"

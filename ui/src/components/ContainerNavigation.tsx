@@ -1,30 +1,16 @@
 import * as React from "react";
 import { Fragment } from "react";
-import { AtlassianWordmark } from "@atlaskit/logo";
-import BacklogIcon from "@atlaskit/icon/glyph/backlog";
-import BoardIcon from "@atlaskit/icon/glyph/board";
-import GraphLineIcon from "@atlaskit/icon/glyph/graph-line";
-import ShortcutIcon from "@atlaskit/icon/glyph/shortcut";
-import {
-  GroupHeading,
-  HeaderSection,
-  MenuSection,
-  Item,
-  Separator,
-  Wordmark
-} from "@atlaskit/navigation-next";
-import { gridSize as gridSizeFn } from "@atlaskit/theme";
-import InlineDialog from "@atlaskit/inline-dialog";
-import { NavigationActions } from "../store/NavigationStore";
+import { HeaderSection, MenuSection, Item } from "@atlaskit/navigation-next";
 import { EditorStore } from "../store";
 import { EditorActions } from "../store/EditorStore";
-import Spinner from "@atlaskit/spinner";
 import { WorkspaceSwitcher } from "./WorkspaceSwitcher";
 
 declare var folder;
+declare var settings;
 
 export const ContainerNavigation = () => {
   const editorDispatch = React.useContext(EditorStore.Dispatch);
+
   return (
     <Fragment>
       <HeaderSection>
@@ -37,19 +23,23 @@ export const ContainerNavigation = () => {
       <MenuSection>
         {({ className }) => (
           <div className={className}>
-            {folder.data.folderTree.files.map(val => (
-              <Item
-                text={val.name}
-                onClick={() => {
-                  folder.open(val.path);
-                  setTimeout(() => {
-                    editorDispatch({
-                      type: EditorActions.RELOAD_FILE
-                    });
-                  }, 100);
-                }}
-              />
-            ))}
+            {folder.data.folderTree.folders
+              .find(
+                val => val.name === settings.data.settings.lastOpenWorkspace
+              )
+              .files.map(val => (
+                <Item
+                  text={val.name}
+                  onClick={() => {
+                    folder.open(val.path);
+                    setTimeout(() => {
+                      editorDispatch({
+                        type: EditorActions.RELOAD_FILE
+                      });
+                    }, 100);
+                  }}
+                />
+              ))}
           </div>
         )}
       </MenuSection>
