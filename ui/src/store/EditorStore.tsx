@@ -33,10 +33,6 @@ type Action =
 
 function reducer(state: IEditorState, action: Action): IEditorState {
   console.log("reducer:", state, action);
-  const goState = {
-    ...state,
-    markdown: folder.data.currentContent || null
-  };
   switch (action.type) {
     case EditorActions.UPDATE_EDITOR_MODE:
       if (action.isPreview && state.markdown !== folder.data.currentContent) {
@@ -44,17 +40,26 @@ function reducer(state: IEditorState, action: Action): IEditorState {
       }
 
       return {
-        ...goState,
+        ...state,
         isPreview: action.isPreview
       };
-    case EditorActions.RELOAD_FILE:
+    case EditorActions.RELOAD_FILE: {
+      const settingData = {
+        ...settings.data.settings,
+        lastOpenFile: folder.data.currentPath.substring(
+          folder.data.currentPath.lastIndexOf("/") + 1
+        )
+      };
+      settings.updateSettings(JSON.stringify(settingData));
+
       return {
         ...state,
         markdown: folder.data.currentContent || null
       };
+    }
     case EditorActions.UPDATE_MARKDOWN:
       return {
-        ...goState,
+        ...state,
         markdown: action.markdown
       };
     default:

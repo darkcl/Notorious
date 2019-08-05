@@ -18,7 +18,7 @@ import (
 type FolderController struct {
 	Folder         *models.Folder `json:"folderTree"`
 	CurrentContent string         `json:"currentContent,omitempty"`
-	CurrentPath    string
+	CurrentPath    string         `json:"currentPath,omitempty"`
 	webView        webview.WebView
 }
 
