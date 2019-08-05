@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { solarizedlight } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { AkCodeBlock } from "@atlaskit/code";
 
 interface ICodeBlock {
   value;
@@ -15,9 +14,9 @@ export class CodeBlock extends React.Component<ICodeBlock, {}> {
   render() {
     const { language, value } = this.props;
     return (
-      <SyntaxHighlighter language={language} style={solarizedlight}>
-        {value}
-      </SyntaxHighlighter>
+      <div className="CodeBlock">
+        <AkCodeBlock language={language} text={value} />
+      </div>
     );
   }
 }

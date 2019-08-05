@@ -123,7 +123,7 @@
     emotion-theming "^10.0.7"
     tslib "^1.9.3"
 
-"@atlaskit/code@^11.0.1":
+"@atlaskit/code@^11.0.1", "@atlaskit/code@^11.0.6":
   version "11.0.6"
   resolved "https://registry.yarnpkg.com/@atlaskit/code/-/code-11.0.6.tgz#71de1e3c77c4a90a13c685dec2eb8d06b1e1b0d4"
   integrity sha512-29paOQ2O4iZcQ32aXNveUzOhw7wteFf/WDr9gvBBri5HhQjr3KCq0tMJXg/0Y+61A0n0ibl4LaIaq8dUCPGZTA==

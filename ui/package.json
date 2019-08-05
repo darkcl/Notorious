@@ -25,6 +25,7 @@
     "webpack-cli": "^3.3.6"
   },
   "dependencies": {
+    "@atlaskit/code": "^11.0.6",
     "@atlaskit/css-reset": "^5.0.4",
     "@atlaskit/drawer": "^5.0.1",
     "@atlaskit/empty-state": "^5.0.3",
