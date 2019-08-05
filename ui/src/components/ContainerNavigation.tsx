@@ -30,6 +30,7 @@ export const ContainerNavigation = () => {
               .files.map(val => (
                 <Item
                   text={val.name}
+                  isSelected={val.path === folder.data.currentPath}
                   onClick={() => {
                     folder.open(val.path);
                     setTimeout(() => {

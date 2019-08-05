@@ -14,6 +14,9 @@ export enum ModalType {
   Settings = 1
 }
 
+declare var folder;
+declare var settings;
+
 const State = React.createContext(null);
 const Dispatch = React.createContext(null);
 
@@ -29,10 +32,8 @@ type ModalAction =
   | { type: ModalActions.SHOW_FILE_MODAL }
   | { type: ModalActions.SHOW_SETTINGS_MODAL }
   | { type: ModalActions.SUBMIT_SETTINGS; settings: string }
-  | { type: ModalActions.SUBMIT_CREATE_FILE; file: string }
+  | { type: ModalActions.SUBMIT_CREATE_FILE; title: string }
   | { type: ModalActions.DISMISS };
-
-declare var settings;
 
 function reducer(state: IModalState, action: ModalAction): IModalState {
   console.log("reducer:", state, action);
@@ -56,6 +57,8 @@ function reducer(state: IModalState, action: ModalAction): IModalState {
     }
     case ModalActions.SUBMIT_CREATE_FILE: {
       // Create file
+      const workspace = settings.data.settings.lastOpenWorkspace;
+      folder.create(action.title, workspace);
       return {
         ...state,
         modalType: ModalType.None

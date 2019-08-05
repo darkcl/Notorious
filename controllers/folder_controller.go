@@ -50,6 +50,27 @@ func (f *FolderController) Clear() {
 	f.Folder = nil
 }
 
+// Create - create a file
+func (f *FolderController) Create(title string, workspace string) {
+	notePath := filepath.Join(f.Folder.Path, workspace, fmt.Sprintf("%s.md", title))
+	noteContent := []byte(fmt.Sprintf("# %s", title))
+	err := ioutil.WriteFile(notePath, noteContent, 0644)
+
+	if err != nil {
+		fmt.Println(err)
+		panic(err)
+	}
+
+	path, err := homedir.Dir()
+
+	if err != nil {
+		panic(err)
+	}
+	settingPath := filepath.Join(path, ".notorious")
+	f.Open(notePath)
+	f.Folder = buildTree(settingPath)
+}
+
 // Open - open a file with path
 func (f *FolderController) Open(path string) {
 

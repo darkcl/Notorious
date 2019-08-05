@@ -5,11 +5,13 @@ import Form, { Field } from "@atlaskit/form";
 import Textfield from "@atlaskit/textfield";
 
 import ModalDialog, { ModalFooter } from "@atlaskit/modal-dialog";
-import { ModalStore } from "../../store";
+import { ModalStore, EditorStore } from "../../store";
 import { ModalActions } from "../../store/ModalStore";
+import { EditorActions } from "../../store/EditorStore";
 
 export const CreateFileModal: React.FunctionComponent = () => {
   const modalDispatch = React.useContext(ModalStore.Dispatch);
+  const editorDispatch = React.useContext(EditorStore.Dispatch);
   const close = () => {
     modalDispatch({
       type: ModalActions.DISMISS
@@ -17,14 +19,15 @@ export const CreateFileModal: React.FunctionComponent = () => {
   };
 
   const onFormSubmit = data => {
-    const form = {
-      title: data.title
-    };
-    console.log(form);
     modalDispatch({
       type: ModalActions.SUBMIT_CREATE_FILE,
-      settings: JSON.stringify(form)
+      title: data.title
     });
+    setTimeout(() => {
+      editorDispatch({
+        type: EditorActions.RELOAD_FILE
+      });
+    }, 100);
   };
 
   const footer = props => (
