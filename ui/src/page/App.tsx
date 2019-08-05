@@ -76,7 +76,7 @@ const App = () => {
 
   return (
     <Hotkeys
-      keyName="ctrl+e,command+e,ctrl+n,command+n"
+      keyName="ctrl+e,command+e,ctrl+n,command+n,escape"
       filter={event => {
         return true;
       }}
