@@ -72,19 +72,31 @@ const Global: React.FunctionComponent = () => {
 const App = () => {
   const editorState = React.useContext(EditorStore.State);
   const editorDispatch = React.useContext(EditorStore.Dispatch);
+  const modalDispatch = React.useContext(ModalStore.Dispatch);
 
   return (
     <Hotkeys
-      keyName="ctrl+e,command+e"
+      keyName="ctrl+e,command+e,ctrl+n,command+n"
       filter={event => {
         return true;
       }}
       onKeyDown={(keyName, e, handle) => {
         e.preventDefault();
-        editorDispatch({
-          type: EditorActions.UPDATE_EDITOR_MODE,
-          isPreview: !editorState.isPreview
-        });
+
+        if (keyName === "ctrl+e" || keyName == "command+e") {
+          editorDispatch({
+            type: EditorActions.UPDATE_EDITOR_MODE,
+            isPreview: !editorState.isPreview
+          });
+          return;
+        }
+
+        if (keyName === "ctrl+n" || keyName == "command+n") {
+          modalDispatch({
+            type: ModalActions.SHOW_FILE_MODAL
+          });
+          return;
+        }
       }}
       onKeyUp={(keyName, e, handle) => {}}
     >
