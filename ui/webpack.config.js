@@ -17,6 +17,19 @@ module.exports = {
   module: {
     rules: [
       {
+        parser: {
+          amd: false
+        },
+        include: /node_modules\/lodash\// // https://github.com/lodash/lodash/issues/3052
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      },
+      {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
       },

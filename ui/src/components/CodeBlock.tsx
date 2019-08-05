@@ -1,5 +1,6 @@
 import * as React from "react";
 import { AkCodeBlock } from "@atlaskit/code";
+import { MermaidBlock } from "./MermaidBlock";
 
 interface ICodeBlock {
   value;
@@ -15,7 +16,13 @@ export class CodeBlock extends React.Component<ICodeBlock, {}> {
     const { language, value } = this.props;
     return (
       <div className="CodeBlock">
-        <AkCodeBlock language={language} text={value} />
+        {language === "mermaid" ? (
+          <MermaidBlock className="" name="mermaid">
+            {value}
+          </MermaidBlock>
+        ) : (
+          <AkCodeBlock language={language} text={value} />
+        )}
       </div>
     );
   }
