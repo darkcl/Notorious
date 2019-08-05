@@ -32,7 +32,7 @@ func NewFolderController(webView webview.WebView) *FolderController {
 	settingPath := filepath.Join(path, ".notorious")
 	folders := buildTree(settingPath)
 	data, _ := json.Marshal(folders)
-	fmt.Print(string(data))
+	fmt.Println(string(data))
 	return &FolderController{
 		webView: webView,
 		Folder:  folders,

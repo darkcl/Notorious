@@ -19,7 +19,7 @@ interface IEditorState {
 
 const initialState: IEditorState = {
   isPreview: false,
-  markdown: null
+  markdown: folder.data.currentContent || null
 };
 
 type Action =

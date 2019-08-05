@@ -92,12 +92,7 @@ const App = () => {
         <LayoutManager
           globalNavigation={Global}
           productNavigation={ProductNavigation}
-          containerNavigation={
-            folder.data.folderTree !== undefined &&
-            folder.data.folderTree !== null
-              ? ContainerNavigation
-              : null
-          }
+          containerNavigation={ContainerNavigation}
         >
           {editorState.markdown !== null ? <EditorPage /> : <EmptyPage />}
         </LayoutManager>

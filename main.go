@@ -104,10 +104,18 @@ func main() {
 		Debug:                  true,
 	})
 	defer w.Exit()
+
+	settings := controllers.NewSettingsController()
+	folder := controllers.NewFolderController(w)
+
+	if settings.Settings.LastOpenFile != "" && settings.Settings.LastOpenWorkspace != "" {
+		folder.Open(filepath.Join(settingPath, settings.Settings.LastOpenWorkspace, settings.Settings.LastOpenFile))
+	}
+
 	w.Dispatch(func() {
 		// Inject controller
-		w.Bind("folder", controllers.NewFolderController(w))
-		w.Bind("settings", controllers.NewSettingsController())
+		w.Bind("folder", folder)
+		w.Bind("settings", settings)
 	})
 	w.Run()
 }
