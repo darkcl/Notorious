@@ -5,11 +5,15 @@
 .editor-page-content {
   height: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .result {
   padding-top: 20px;
   padding-left: 20px;
+  flex-grow: 1;
+  overflow: auto;
 }
 
 .result a {
@@ -25,6 +29,8 @@
 .ReactCodeMirror {
   height: 100%;
   font-size: 18px;
+  flex-grow: 1;
+  overflow: auto;
 }
 
 .CodeBlock {
