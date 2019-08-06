@@ -1,7 +1,7 @@
 import * as React from "react";
 import Button from "@atlaskit/button";
 
-import Form, { Field, CheckboxField } from "@atlaskit/form";
+import Form, { Field, CheckboxField, HelperMessage } from "@atlaskit/form";
 import Textfield from "@atlaskit/textfield";
 
 import ModalDialog, { ModalFooter } from "@atlaskit/modal-dialog";
@@ -79,7 +79,17 @@ export const SettingsModal: React.FunctionComponent = () => {
         defaultValue={settings.data.settings.jira.accessToken}
       >
         {({ fieldProps }) => (
-          <Textfield autoComplete="off" {...fieldProps} type="password" />
+          <React.Fragment>
+            <Textfield autoComplete="off" {...fieldProps} type="password" />
+            <HelperMessage>
+              {
+                <p>
+                  You can create token{" "}
+                  <a href="https://id.atlassian.com/manage/api-tokens">here</a>
+                </p>
+              }
+            </HelperMessage>
+          </React.Fragment>
         )}
       </Field>
     </ModalDialog>
