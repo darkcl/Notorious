@@ -591,6 +591,21 @@
     react-transition-group "^2.2.1"
     tslib "^1.9.3"
 
+"@atlaskit/tooltip@^15.0.8":
+  version "15.0.8"
+  resolved "https://registry.yarnpkg.com/@atlaskit/tooltip/-/tooltip-15.0.8.tgz#4215a71468b75cf54c70932b389d310c9359a3a6"
+  integrity sha512-mFK65d0quTl6CuS5BZRa3EPP7f8fgdbHHrFKdolSp7fn3Sw3s1haQpZDANp4ufmTQnCD2Pa11rprYpBNkahaQQ==
+  dependencies:
+    "@atlaskit/analytics-next" "^5.1.2"
+    "@atlaskit/popper" "^3.0.1"
+    "@atlaskit/portal" "^3.0.7"
+    "@atlaskit/theme" "^9.0.0"
+    "@babel/runtime" "^7.0.0"
+    flushable "^1.0.0"
+    react-node-resolver "^1.0.1"
+    react-transition-group "^2.2.1"
+    tslib "^1.9.3"
+
 "@atlaskit/type-helpers@^4.1.5":
   version "4.1.5"
   resolved "https://registry.yarnpkg.com/@atlaskit/type-helpers/-/type-helpers-4.1.5.tgz#3abbe83d427761384ce1c3f3d829316f8eda431f"
