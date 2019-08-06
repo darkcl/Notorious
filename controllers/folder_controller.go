@@ -39,12 +39,6 @@ func NewFolderController(webView webview.WebView) *FolderController {
 	}
 }
 
-// Read - Open folder picker and read as file tree
-func (f *FolderController) Read() {
-	dir := f.webView.Dialog(webview.DialogTypeOpen, webview.DialogFlagDirectory, "Open directory", "")
-	f.Folder = buildTree(dir)
-}
-
 // Clear - clear current folder tree
 func (f *FolderController) Clear() {
 	f.Folder = nil

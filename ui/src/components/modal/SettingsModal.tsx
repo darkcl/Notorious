@@ -20,6 +20,7 @@ export const SettingsModal: React.FunctionComponent = () => {
 
   const onFormSubmit = data => {
     const form = {
+      ...settings.data.settings,
       jira: {
         baseUrl: data.jiraBaseUrl,
         user: data.jiraUser,
