@@ -10,7 +10,7 @@ import (
 	"path/filepath"
 
 	"github.com/darkcl/Notorious/models"
-	"github.com/lukevers/webview"
+	"github.com/darkcl/webview"
 	"github.com/mitchellh/go-homedir"
 )
 

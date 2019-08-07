@@ -1,18 +1,15 @@
 import * as React from "react";
-import Error from "@atlaskit/icon/glyph/error";
-import Info from "@atlaskit/icon/glyph/info";
-import Tick from "@atlaskit/icon/glyph/check-circle";
-import Warning from "@atlaskit/icon/glyph/warning";
-import { colors } from "@atlaskit/theme";
 
 export enum FlagActions {
   SHOW_MESSAGE = "SHOW_MESSAGE",
+  SHOW_WARNING = "SHOW_WARNING",
   DISMISS = "DISMISS"
 }
 
 export enum FlagType {
   None = -1,
-  Message = 0
+  Message = 0,
+  Warning = 1
 }
 
 export interface FlagData {
@@ -21,12 +18,13 @@ export interface FlagData {
   id: number;
   key: number;
   title: string;
+  type: string;
 }
 
 const State = React.createContext(null);
 const Dispatch = React.createContext(null);
 
-interface IFlagState {
+export interface IFlagState {
   flagCount: number;
   flags: FlagData[];
 }
@@ -38,43 +36,23 @@ const initialState: IFlagState = {
 
 type FlagAction =
   | { type: FlagActions.SHOW_MESSAGE; message: string }
+  | { type: FlagActions.SHOW_WARNING; message: string }
   | { type: FlagActions.DISMISS };
 
-const getRandomIcon = () => {
-  const icons = iconMap() as { [key: string]: object };
-  const iconArray = Object.keys(icons).map(i => icons[i]);
-  return iconArray[Math.floor(Math.random() * iconArray.length)];
-};
-
-const iconMap = (key?: string, color?: string) => {
-  const icons: { [key: string]: React.ReactElement } = {
-    info: <Info label="Info icon" primaryColor={color || colors.P300} />,
-    success: <Tick label="Success icon" primaryColor={color || colors.G300} />,
-    warning: (
-      <Warning label="Warning icon" primaryColor={color || colors.Y300} />
-    ),
-    error: <Error label="Error icon" primaryColor={color || colors.R300} />
-  };
-
-  return key ? icons[key] : icons;
-};
-
-const getRandomDescription = () => {
-  const descriptions = [
-    "Marzipan croissant pie. Jelly beans gingerbread caramels brownie icing.",
-    "Fruitcake topping wafer pie candy dragée sesame snaps cake. Cake cake cheesecake. Pie tiramisu carrot cake tart tart dessert cookie. Lemon drops cookie tootsie roll marzipan liquorice cotton candy brownie halvah."
-  ];
-
-  return descriptions[Math.floor(Math.random() * descriptions.length)];
-};
-
-const getFlagData = (index: number, timeOffset: number = 0): FlagData => {
+const getFlagData = (
+  index: number,
+  description: string,
+  timeOffset: number = 0,
+  flagTitle: string = "Message",
+  flagType: string = "info"
+): FlagData => {
   return {
     created: Date.now() - timeOffset * 1000,
-    description: getRandomDescription(),
+    description,
     id: index,
     key: index,
-    title: `${index + 1}: Whoa a new flag!`
+    title: flagTitle,
+    type: flagType
   };
 };
 
@@ -83,7 +61,18 @@ function reducer(state: IFlagState, action: FlagAction): IFlagState {
   switch (action.type) {
     case FlagActions.SHOW_MESSAGE: {
       const flags = state.flags.slice();
-      flags.unshift(getFlagData(state.flagCount++));
+      flags.unshift(getFlagData(state.flagCount++, action.message));
+      return {
+        ...state,
+        flags: flags,
+        flagCount: flags.length
+      };
+    }
+    case FlagActions.SHOW_WARNING: {
+      const flags = state.flags.slice();
+      flags.unshift(
+        getFlagData(state.flagCount++, action.message, 0, "Warning", "warning")
+      );
       return {
         ...state,
         flags: flags,

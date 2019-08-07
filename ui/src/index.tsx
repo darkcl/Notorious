@@ -8,6 +8,7 @@ import App from "./page/App";
 import { Store } from "./store";
 import { Modal } from "./components/modal/Modal";
 import { FlagGroupComponent } from "./components/FlagGroupComponent";
+import { ErrorBoundary } from "./components/ErrorBoundry";
 import { DrawerComponent } from "./components/drawer/DrawerComponent";
 
 declare var external;
@@ -17,30 +18,15 @@ declare var settings;
 const render = () =>
   ReactDOM.render(
     <Store>
-      <App />
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
       <Modal />
       <FlagGroupComponent />
       <DrawerComponent />
     </Store>,
     document.getElementById("root")
   );
-
-// counter.render = render;
-// if (folder !== undefined) {
-//   folder.render = render;
-// }
-
-/*
-{
-  "lastOpenFile": "",
-  "lastOpenWorkspace": "",
-  "jira": {
-    "baseUrl": "",
-    "user": "",
-    "accessToken": ""
-  }
-}
-*/
 
 folder.render = render;
 settings.render = render;

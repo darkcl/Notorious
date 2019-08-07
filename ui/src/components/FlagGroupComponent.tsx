@@ -1,10 +1,17 @@
 import * as React from "react";
 import Flag from "@atlaskit/flag";
 import { FlagGroup } from "@atlaskit/flag";
-import { FlagStore, FlagActions } from "../store/FlagStore";
+import { FlagStore, FlagActions, IFlagState } from "../store/FlagStore";
+
+import Error from "@atlaskit/icon/glyph/error";
+import Info from "@atlaskit/icon/glyph/info";
+import Tick from "@atlaskit/icon/glyph/check-circle";
+import Warning from "@atlaskit/icon/glyph/warning";
+
+import { colors } from "@atlaskit/theme";
 
 export const FlagGroupComponent: React.FunctionComponent = () => {
-  const flagState = React.useContext(FlagStore.State);
+  const flagState: IFlagState = React.useContext(FlagStore.State);
   const flagDispatch = React.useContext(FlagStore.Dispatch);
 
   const dismissFlag = () => {
@@ -13,13 +20,22 @@ export const FlagGroupComponent: React.FunctionComponent = () => {
     });
   };
 
-  const actions = [
-    {
-      content: "Nice one!",
-      onClick: () => {}
-    },
-    { content: "Not right now thanks", onClick: dismissFlag }
-  ];
+  const iconMap = (key: string, color?: string) => {
+    const icons: { [key: string]: React.ReactElement } = {
+      info: <Info label="Info icon" primaryColor={color || colors.P300} />,
+      success: (
+        <Tick label="Success icon" primaryColor={color || colors.G300} />
+      ),
+      warning: (
+        <Warning label="Warning icon" primaryColor={color || colors.Y300} />
+      ),
+      error: <Error label="Error icon" primaryColor={color || colors.R300} />
+    };
+
+    return icons[key];
+  };
+
+  const actions = [{ content: "Close", onClick: dismissFlag }];
 
   return (
     <FlagGroup onDismissed={dismissFlag}>
@@ -28,9 +44,9 @@ export const FlagGroupComponent: React.FunctionComponent = () => {
           id={flag.id}
           key={flag.id}
           actions={actions}
-          icon={null}
-          title="Flag Title"
-          description="Flag description"
+          icon={iconMap(flag.type)}
+          title={flag.title}
+          description={flag.description}
         />
       ))}
     </FlagGroup>

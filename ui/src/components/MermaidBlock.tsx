@@ -1,7 +1,6 @@
 import * as React from "react";
 import * as mermaid from "mermaid";
 import { mermaidAPI } from "mermaid";
-import { ErrorBoundary } from "./ErrorBoundry";
 
 mermaid.initialize({ startOnLoad: false });
 
@@ -40,12 +39,10 @@ export class MermaidBlock extends React.Component<
         <pre>{this.state.error["str"]}</pre>
       </div>
     ) : (
-      <ErrorBoundary>
-        <div
-          className={`mermaid ${this.props.className}`}
-          dangerouslySetInnerHTML={{ __html: this.state.diagram }}
-        />
-      </ErrorBoundary>
+      <div
+        className={`mermaid ${this.props.className}`}
+        dangerouslySetInnerHTML={{ __html: this.state.diagram }}
+      />
     );
   };
 }

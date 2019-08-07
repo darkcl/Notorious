@@ -6,6 +6,7 @@ import BitbucketPullrequestsIcon from "@atlaskit/icon/glyph/bitbucket/pullreques
 import BitbucketBranchesIcon from "@atlaskit/icon/glyph/bitbucket/branches";
 
 import { JIRA } from "../services";
+import { FlagStore, FlagActions } from "../store/FlagStore";
 
 declare var settings;
 declare var external;
@@ -46,12 +47,12 @@ const RepositoryButton: React.FunctionComponent<{
   </Tooltip>
 );
 
-export class JiraBlock extends React.Component<{ issueKey: string }, {}> {
-  constructor(props) {
-    super(props);
-  }
+export const JiraBlock: React.FunctionComponent<{
+  issueKey: string;
+}> = props => {
+  const flagDispatch = React.useContext(FlagStore.Dispatch);
 
-  getJiraClient = () => {
+  const getJiraClient = () => {
     // Get Jira Setting from golang bindings
     const jiraSettings = settings.data.settings.jira;
 
@@ -69,48 +70,58 @@ export class JiraBlock extends React.Component<{ issueKey: string }, {}> {
     return null;
   };
 
-  onIssueButtonClick = () => {
-    if (this.getJiraClient() !== null) {
+  const onIssueButtonClick = () => {
+    if (getJiraClient() !== null) {
       external.invoke(
         "openlink: " +
-          `${settings.data.settings.jira.baseUrl}/browse/${this.props.issueKey}`
+          `${settings.data.settings.jira.baseUrl}/browse/${props.issueKey}`
       );
     }
   };
 
-  onPullRequestClick = () => {
-    if (this.getJiraClient() !== null) {
-    } else {
+  const onPullRequestClick = async () => {
+    const client = getJiraClient();
+    if (client !== null) {
+      try {
+        const res = await client.getIssue(props.issueKey);
+        const prData = await client.getDevelopmentStatus(res.id);
+      } catch (e) {
+        flagDispatch({
+          type: FlagActions.SHOW_WARNING,
+          message: e.message
+        });
+      }
     }
   };
 
-  onRepositoryClick = () => {
-    if (this.getJiraClient() !== null) {
-    } else {
+  const onRepositoryClick = () => {
+    const client = getJiraClient();
+    if (client !== null) {
     }
   };
-
-  render() {
-    return (
-      <div>
+  return (
+    <div>
+      <Row>
         <Row>
-          <Row>
-            <ButtonGroup appearance="default">
-              <Button onClick={this.onIssueButtonClick}>
-                Open <strong>{this.props.issueKey}</strong>
-              </Button>
-              <PullRequestButton
-                onPullRequestClick={this.onPullRequestClick}
-                isSetup={this.getJiraClient() === null}
-              />
-              <RepositoryButton
-                onRepositoryClick={this.onRepositoryClick}
-                isSetup={this.getJiraClient() === null}
-              />
-            </ButtonGroup>
-          </Row>
+          <ButtonGroup appearance="default">
+            <Button
+              onClick={async () => {
+                await onIssueButtonClick();
+              }}
+            >
+              Open <strong>{props.issueKey}</strong>
+            </Button>
+            <PullRequestButton
+              onPullRequestClick={onPullRequestClick}
+              isSetup={getJiraClient() === null}
+            />
+            <RepositoryButton
+              onRepositoryClick={onRepositoryClick}
+              isSetup={getJiraClient() === null}
+            />
+          </ButtonGroup>
         </Row>
-      </div>
-    );
-  }
-}
+      </Row>
+    </div>
+  );
+};

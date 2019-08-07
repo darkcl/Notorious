@@ -3,7 +3,7 @@ module github.com/darkcl/Notorious
 go 1.12
 
 require (
+	github.com/darkcl/webview v0.0.0-20190807062217-7b5ebb1dec1c
 	github.com/leaanthony/mewn v0.10.7
-	github.com/lukevers/webview v0.0.0-20190220004546-0e3bf72ae2ae
 	github.com/mitchellh/go-homedir v1.1.0
 )

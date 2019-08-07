@@ -1,6 +1,7 @@
+github.com/darkcl/webview v0.0.0-20190807062217-7b5ebb1dec1c h1:zoTlxhwSMWcKZaYHivV1Vc+dhrUMNUekfDcd1XQIU2M=
+github.com/darkcl/webview v0.0.0-20190807062217-7b5ebb1dec1c/go.mod h1:pXyCNfHwhn7dRDslNqaGrbAeIh+nVP3nGVc+NYN8ccA=
 github.com/leaanthony/mewn v0.10.7 h1:jCcNJyIUOpwj+I5SuATvCugDjHkoo+j6ubEOxxrxmPA=
 github.com/leaanthony/mewn v0.10.7/go.mod h1:CRkTx8unLiSSilu/Sd7i1LwrdaAL+3eQ3ses99qGMEQ=
-github.com/lukevers/webview v0.0.0-20190220004546-0e3bf72ae2ae h1:fmWWZzZKh60Tx/Xp24widHinmhMDTnPRFwWgTiMGDGk=
 github.com/lukevers/webview v0.0.0-20190220004546-0e3bf72ae2ae/go.mod h1:SPUkuBOrWC1RDw/E7jtsn1gtBNMQb400YkpJcg3UDFw=
 github.com/mitchellh/go-homedir v1.1.0 h1:lukF9ziXFxDFPkA1vsr5zpc1XuPDn/wFntq5mG+4E0Y=
 github.com/mitchellh/go-homedir v1.1.0/go.mod h1:SfyaCUpYCn1Vlf4IUYiD9fPX4A5wJrkLzIz1N1q0pr0=

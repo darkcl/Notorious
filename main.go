@@ -11,7 +11,7 @@ import (
 	"github.com/darkcl/Notorious/controllers"
 	"github.com/darkcl/Notorious/helpers"
 	"github.com/leaanthony/mewn"
-	webview "github.com/lukevers/webview"
+	webview "github.com/darkcl/webview"
 	"github.com/mitchellh/go-homedir"
 )
 

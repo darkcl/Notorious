@@ -5,10 +5,8 @@ import "../style/EditorPage.css";
 
 import { Editor } from "../components/Editor";
 import { CodeBlock } from "../components/CodeBlock";
-import { EmptyPage } from "../components/EmptyPage";
 import { EditorStore } from "../store";
 import { EditorActions } from "../store/EditorStore";
-import { ErrorBoundary } from "../components/ErrorBoundry";
 
 export const EditorPage = () => {
   const editorDispatch = React.useContext(EditorStore.Dispatch);
@@ -17,13 +15,11 @@ export const EditorPage = () => {
   return (
     <div className="editor-page-content">
       {editorState.isPreview ? (
-        <ErrorBoundary>
-          <ReactMarkdown
-            className="result"
-            source={editorState.markdown}
-            renderers={{ code: CodeBlock }}
-          />
-        </ErrorBoundary>
+        <ReactMarkdown
+          className="result"
+          source={editorState.markdown}
+          renderers={{ code: CodeBlock }}
+        />
       ) : (
         <Editor
           className="editor"

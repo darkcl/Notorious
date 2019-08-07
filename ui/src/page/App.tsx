@@ -1,6 +1,4 @@
 import * as React from "react";
-import { useReducer, useContext } from "react";
-import Icon from "@atlaskit/icon";
 import Hotkeys from "react-hot-keys";
 import {
   GlobalItem,
@@ -15,10 +13,8 @@ import { ProductNavigation } from "../components/ProductNavigation";
 import { ContainerNavigation } from "../components/ContainerNavigation";
 import { EditorStore, ModalStore } from "../store";
 import { EditorActions } from "../store/EditorStore";
-import { NavigationStore } from "../store/NavigationStore";
 import { EmptyPage } from "../components/EmptyPage";
 import { ModalActions } from "../store/ModalStore";
-import { FlagStore, FlagActions } from "../store/FlagStore";
 import { DrawerStore, DrawerActions } from "../store/DrawerStore";
 
 import { AppIcon } from "../components/AppIcon";
@@ -37,7 +33,6 @@ const AppSwitcherComponent = props => (
 const Global: React.FunctionComponent = () => {
   const modalDispatch = React.useContext(ModalStore.Dispatch);
   const drawerDispatch = React.useContext(DrawerStore.Dispatch);
-  const flagDispatch = React.useContext(FlagStore.Dispatch);
 
   return (
     <GlobalNavigation
@@ -47,10 +42,6 @@ const Global: React.FunctionComponent = () => {
       onCreateClick={() => drawerDispatch({ type: DrawerActions.SHOW })}
       onSearchClick={() => {
         console.log("search click");
-        flagDispatch({
-          type: FlagActions.SHOW_MESSAGE,
-          message: "testing"
-        });
       }}
       onStarredClick={() => {
         console.log("starred clicked");
