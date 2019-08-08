@@ -30,7 +30,24 @@ export class Editor extends React.Component<
       mode: "markdown",
       theme: "monokai",
       lineNumbers: true,
-      lineWrapping: true
+      lineWrapping: true,
+      indentUnit: 2,
+      indentWithTabs: false,
+      extraKeys: {
+        Tab: cm => {
+          if (cm.somethingSelected()) {
+            cm.indentSelection("add");
+          } else {
+            cm.replaceSelection(
+              cm.getOption("indentWithTabs")
+                ? "\t"
+                : Array(cm.getOption("indentUnit") + 1).join(" "),
+              "end",
+              "+input"
+            );
+          }
+        }
+      }
     };
     return (
       <CodeMirror
