@@ -34,6 +34,29 @@ interface PullRequest {
   lastUpdate: Date;
 }
 
+interface Repository {
+  name: string;
+  avatar: string;
+  url: string;
+  commits: any[];
+}
+
+interface LastCommit {
+  id: string;
+  displayId: string;
+  authorTimestamp: Date;
+  merge: boolean;
+  files: any[];
+}
+
+interface Branch {
+  name: string;
+  url: string;
+  createPullRequestUrl: string;
+  repository: Repository;
+  lastCommit: LastCommit;
+}
+
 export const PullRequestRows = (pullRequests: PullRequest[]) =>
   pullRequests.map((pr: PullRequest, index: number) => ({
     key: `row-${index}-${pr.id}`,
@@ -45,6 +68,21 @@ export const PullRequestRows = (pullRequests: PullRequest[]) =>
       {
         key: pr.author.name,
         content: pr.author.name
+      }
+    ]
+  }));
+
+export const BranchRows = (branches: Branch[]) =>
+  branches.map((branch: Branch, index: number) => ({
+    key: `row-${index}-${branch.name}`,
+    cells: [
+      {
+        key: branch.name,
+        content: <a href={branch.url}>{branch.name}</a>
+      },
+      {
+        key: branch.repository.name,
+        content: <a href={branch.repository.url}>{branch.repository.name}</a>
       }
     ]
   }));

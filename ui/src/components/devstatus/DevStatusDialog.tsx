@@ -10,7 +10,7 @@ import Spinner from "@atlaskit/spinner";
 
 import { DynamicTableStateless } from "@atlaskit/dynamic-table";
 
-import { PullRequestRows } from "./rows/PullRequestRows";
+import { PullRequestRows, BranchRows } from "./rows/rows";
 
 declare var settings;
 
@@ -24,8 +24,6 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  font-size: 4em;
-  font-weight: 500;
   justify-content: center;
   margin-bottom: ${gridSize}px;
   margin-top: ${math.multiply(gridSize, 2)}px;
@@ -37,14 +35,14 @@ export const DevStatusDialog: React.FunctionComponent<{
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [pullRequests, setPullRequests] = React.useState([]);
-  const [repositories, setRepositories] = React.useState([]);
+  const [branches, setBranches] = React.useState([]);
   const flagDispatch = React.useContext(FlagStore.Dispatch);
 
   const tabs = [
     {
       label: "Pull Requests",
       content: (
-        <div>
+        <Content>
           <DynamicTableStateless
             rows={PullRequestRows(pullRequests)}
             loadingSpinnerSize="large"
@@ -53,10 +51,24 @@ export const DevStatusDialog: React.FunctionComponent<{
             onSort={() => console.log("onSort")}
             onSetPage={() => console.log("onSetPage")}
           />
-        </div>
+        </Content>
       )
     },
-    { label: "Repositories", content: <Content>Two</Content> }
+    {
+      label: "Branches",
+      content: (
+        <Content>
+          <DynamicTableStateless
+            rows={BranchRows(branches)}
+            loadingSpinnerSize="large"
+            isLoading={isLoading}
+            isFixedSize
+            onSort={() => console.log("onSort")}
+            onSetPage={() => console.log("onSetPage")}
+          />
+        </Content>
+      )
+    }
   ];
 
   const TabsContent: React.FunctionComponent = props => (
@@ -93,7 +105,7 @@ export const DevStatusDialog: React.FunctionComponent<{
         const prData = await client.getDevelopmentStatus(res.id);
         if (prData.detail.length > 0) {
           setPullRequests(prData.detail[0].pullRequests || []);
-          setRepositories(prData.detail[0].repositories || []);
+          setBranches(prData.detail[0].branches || []);
         }
         setIsLoading(false);
       } catch (e) {
