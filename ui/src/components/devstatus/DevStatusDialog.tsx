@@ -1,12 +1,10 @@
 import * as React from "react";
 import InlineDialog from "@atlaskit/inline-dialog";
 import Button from "@atlaskit/button";
-import Tooltip from "@atlaskit/tooltip";
 import BitbucketBranchesIcon from "@atlaskit/icon/glyph/bitbucket/branches";
 import { JIRA } from "../../services";
 import { FlagStore, FlagActions } from "../../store/FlagStore";
 import Tabs from "@atlaskit/tabs";
-import Spinner from "@atlaskit/spinner";
 
 import { DynamicTableStateless } from "@atlaskit/dynamic-table";
 
@@ -48,6 +46,7 @@ export const DevStatusDialog: React.FunctionComponent<{
             loadingSpinnerSize="large"
             isLoading={isLoading}
             isFixedSize
+            emptyView={<p>No Pull Request</p>}
             onSort={() => console.log("onSort")}
             onSetPage={() => console.log("onSetPage")}
           />
@@ -63,6 +62,7 @@ export const DevStatusDialog: React.FunctionComponent<{
             loadingSpinnerSize="large"
             isLoading={isLoading}
             isFixedSize
+            emptyView={<p>No Branch</p>}
             onSort={() => console.log("onSort")}
             onSetPage={() => console.log("onSetPage")}
           />
