@@ -240,6 +240,21 @@
     keycode "^2.1.7"
     prop-types "^15.5.10"
 
+"@atlaskit/dynamic-table@^13.1.7":
+  version "13.1.7"
+  resolved "https://registry.yarnpkg.com/@atlaskit/dynamic-table/-/dynamic-table-13.1.7.tgz#f420343e0b4866c075c561e77d06468ec23c6fc2"
+  integrity sha512-gaZwP0mdjvUmwtx6bDCcQ5Tleq3EDUXj5qnFCO22B9kpJKoiwNCw8AimH6Oo/QWgDiyubnwT5dKGMVi85KOPyA==
+  dependencies:
+    "@atlaskit/analytics-next" "^5.1.2"
+    "@atlaskit/pagination" "^12.0.9"
+    "@atlaskit/spinner" "^12.0.5"
+    "@atlaskit/theme" "^9.0.0"
+    "@atlaskit/type-helpers" "^4.1.5"
+    "@babel/runtime" "^7.0.0"
+    prop-types "^15.5.10"
+    react-beautiful-dnd "^10.0.2"
+    tslib "^1.9.3"
+
 "@atlaskit/empty-state@^5.0.3":
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/@atlaskit/empty-state/-/empty-state-5.0.3.tgz#3c170b2343b443190a5f69bdb5f65cd77e1cbc67"
@@ -482,6 +497,18 @@
     "@atlaskit/util-service-support" "^4.0.5"
     tslib "^1.9.3"
 
+"@atlaskit/pagination@^12.0.9":
+  version "12.0.9"
+  resolved "https://registry.yarnpkg.com/@atlaskit/pagination/-/pagination-12.0.9.tgz#20ac404430ffaf9d788e5c4b6d4006a3846ae5ef"
+  integrity sha512-ZkYbn0MDFPnISbGC9zxEGIzH3v2qLM2pX0XehbXgrZ+qkpIXOJEJ8Nmtt1VGsEXooVgJv5e6Ae5QbqUpe15oDg==
+  dependencies:
+    "@atlaskit/analytics-next" "^5.1.2"
+    "@atlaskit/button" "^13.0.16"
+    "@atlaskit/icon" "^19.0.0"
+    "@atlaskit/theme" "^9.1.1"
+    "@babel/runtime" "^7.0.0"
+    tslib "^1.9.3"
+
 "@atlaskit/polyfills@^4.0.1":
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/@atlaskit/polyfills/-/polyfills-4.0.1.tgz#697e959c385069f72295310492412157b3972ab0"
@@ -556,6 +583,19 @@
     "@babel/runtime" "^7.0.0"
     react-transition-group "^2.2.1"
     tslib "^1.9.3"
+
+"@atlaskit/tabs@^11.0.3":
+  version "11.0.3"
+  resolved "https://registry.yarnpkg.com/@atlaskit/tabs/-/tabs-11.0.3.tgz#71e5bf7adac427412a7751979ccc63e2a27d3f3d"
+  integrity sha512-HmPLW1FCvAGhUePT+Fa93bEAQ8zNm/HzSso3K6pi7vJF1kSrtcPTZYvFbygeQbLFq3dQpB4PrewBu9ZANa+4NA==
+  dependencies:
+    "@atlaskit/analytics-next" "^5.1.2"
+    "@atlaskit/theme" "^9.1.1"
+    "@babel/runtime" "^7.0.0"
+    classnames "^2.2.5"
+    css-element-queries "^0.3.2"
+    debounce "^1.0.0"
+    keycode "^2.1.7"
 
 "@atlaskit/textfield@^2.0.4":
   version "2.0.4"
@@ -3002,6 +3042,11 @@ css-color-keywords@^1.0.0:
   resolved "https://registry.yarnpkg.com/css-color-keywords/-/css-color-keywords-1.0.0.tgz#fea2616dc676b2962686b3af8dbdbe180b244e05"
   integrity sha1-/qJhbcZ2spYmhrOvjb2+GAskTgU=
 
+css-element-queries@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/css-element-queries/-/css-element-queries-0.3.2.tgz#535d80891b3af21395d005f19905fe5154b5ccff"
+  integrity sha1-U12AiRs68hOV0AXxmQX+UVS1zP8=
+
 css-loader@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-3.1.0.tgz#6f008b993b8ce812e6bab57f3cbfdc7a7cf28685"
@@ -3340,6 +3385,11 @@ de-indent@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/de-indent/-/de-indent-1.0.2.tgz#b2038e846dc33baa5796128d0804b455b8c1e21d"
   integrity sha1-sgOOhG3DO6pXlhKNCAS0VbjB4h0=
+
+debounce@^1.0.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/debounce/-/debounce-1.2.0.tgz#44a540abc0ea9943018dc0eaa95cce87f65cd131"
+  integrity sha512-mYtLl1xfZLi1m4RtQYlZgJUNQjl4ZxVnHzIR8nLLgi4q1YT8o/WM+MK/f8yfcc9s5Ir5zRaPZyZU6xs1Syoocg==
 
 debug@^2.2.0, debug@^2.3.3:
   version "2.6.9"

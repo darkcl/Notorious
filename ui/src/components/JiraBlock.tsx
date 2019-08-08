@@ -1,50 +1,16 @@
 import * as React from "react";
 import Button from "@atlaskit/button";
 import { ButtonGroup } from "@atlaskit/button";
-import Tooltip from "@atlaskit/tooltip";
-import BitbucketPullrequestsIcon from "@atlaskit/icon/glyph/bitbucket/pullrequests";
-import BitbucketBranchesIcon from "@atlaskit/icon/glyph/bitbucket/branches";
 
 import { JIRA } from "../services";
 import { FlagStore, FlagActions } from "../store/FlagStore";
+import { DevStatusDialog } from "./devstatus/DevStatusDialog";
 
 declare var settings;
 declare var external;
 
 const Row = (props: React.HTMLProps<HTMLDivElement>) => (
   <div css={{ padding: 8 }} {...props} />
-);
-
-const PullRequestButton: React.FunctionComponent<{
-  onPullRequestClick: () => void;
-  isSetup: boolean;
-}> = props => {
-  return (
-    <Tooltip
-      content={props.isSetup ? "Please setup jira" : "Show Pull Request"}
-    >
-      <Button
-        appearance="subtle-link"
-        onClick={props.onPullRequestClick}
-        iconBefore={
-          <BitbucketPullrequestsIcon label="pullrequest" size="medium" />
-        }
-      />
-    </Tooltip>
-  );
-};
-
-const RepositoryButton: React.FunctionComponent<{
-  onRepositoryClick: () => void;
-  isSetup: boolean;
-}> = props => (
-  <Tooltip content={props.isSetup ? "Please setup jira" : "Show Repository"}>
-    <Button
-      onClick={props.onRepositoryClick}
-      appearance="subtle-link"
-      iconBefore={<BitbucketBranchesIcon label="repo" size="medium" />}
-    />
-  </Tooltip>
 );
 
 export const JiraBlock: React.FunctionComponent<{
@@ -111,14 +77,7 @@ export const JiraBlock: React.FunctionComponent<{
             >
               Open <strong>{props.issueKey}</strong>
             </Button>
-            <PullRequestButton
-              onPullRequestClick={onPullRequestClick}
-              isSetup={getJiraClient() === null}
-            />
-            <RepositoryButton
-              onRepositoryClick={onRepositoryClick}
-              isSetup={getJiraClient() === null}
-            />
+            <DevStatusDialog issueKey={props.issueKey} />
           </ButtonGroup>
         </Row>
       </Row>
