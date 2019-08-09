@@ -3,7 +3,7 @@ import * as React from "react";
 import { IFile, IFolder } from "../interface/IFolder";
 
 export enum NavigationActions {
-  UPDATE_WORKING_DIR = "UPDATE_WORKING_DIR"
+  UPDATE_WORKSPACE = "UPDATE_WORKSPACE"
 }
 
 declare var settings;
@@ -67,7 +67,7 @@ const initialState: INavigationState = {
 };
 
 type NavigationAction = {
-  type: NavigationActions.UPDATE_WORKING_DIR;
+  type: NavigationActions.UPDATE_WORKSPACE;
   workingDirectory: IFolder;
 };
 
@@ -80,9 +80,9 @@ function reducer(
     ...state
   };
   switch (action.type) {
-    case NavigationActions.UPDATE_WORKING_DIR:
+    case NavigationActions.UPDATE_WORKSPACE:
       return {
-        ...goState,
+        ...state,
         workingDirectory: action.workingDirectory
       };
     default:

@@ -32,7 +32,7 @@ export const ProductNavigation = () => {
               text="Dashboard"
               onClick={() => {
                 navigationDispatcher({
-                  type: NavigationActions.UPDATE_WORKING_DIR,
+                  type: NavigationActions.UPDATE_WORKSPACE,
                   workingDirectory: "testing"
                 });
               }}

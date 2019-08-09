@@ -88,6 +88,35 @@ func (f *FolderController) Save(content string) {
 	f.CurrentContent = content
 }
 
+// CreateWorkspace - create a workspace
+func (f *FolderController) CreateWorkspace(name string) {
+	path, err := homedir.Dir()
+
+	if err != nil {
+		panic(err)
+	}
+	workspacePath := filepath.Join(path, ".notorious", name)
+
+	if _, err := os.Stat(workspacePath); os.IsNotExist(err) {
+		os.Mkdir(workspacePath, os.ModePerm)
+	}
+
+	f.Folder = buildTree(filepath.Join(path, ".notorious"))
+}
+
+// OpenWorkspace - open workspace
+func (f *FolderController) OpenWorkspace(name string) {
+	f.CurrentContent = ""
+	f.CurrentPath = ""
+	for _, folder := range f.Folder.Folders {
+		if folder.Name == name && len(folder.Files) > 0 {
+			f.Open(folder.Files[0].Path)
+		}
+	}
+}
+
+// Private Functions
+
 func buildTree(dir string) *models.Folder {
 	dir = path.Clean(dir)
 	var tree *models.Folder

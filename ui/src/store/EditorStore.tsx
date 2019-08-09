@@ -44,13 +44,18 @@ function reducer(state: IEditorState, action: Action): IEditorState {
         isPreview: action.isPreview
       };
     case EditorActions.RELOAD_FILE: {
-      const settingData = {
-        ...settings.data.settings,
-        lastOpenFile: folder.data.currentPath.substring(
-          folder.data.currentPath.lastIndexOf("/") + 1
-        )
-      };
-      settings.updateSettings(JSON.stringify(settingData));
+      if (
+        folder.data.currentPath !== undefined &&
+        folder.data.currentPath.length !== 0
+      ) {
+        const settingData = {
+          ...settings.data.settings,
+          lastOpenFile: folder.data.currentPath.substring(
+            folder.data.currentPath.lastIndexOf("/") + 1
+          )
+        };
+        settings.updateSettings(JSON.stringify(settingData));
+      }
 
       return {
         ...state,

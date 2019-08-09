@@ -29,7 +29,12 @@ export const CreateDrawer: React.FunctionComponent = () => {
     <React.Fragment>
       <DrawerItemGroup title="Workspace">
         <DrawerItem
-          onClick={() => drawerDispatch({ type: DrawerActions.DISMISS })}
+          onClick={() => {
+            modalDispatch({
+              type: ModalActions.SHOW_WORKSPACE_MODAL
+            });
+            drawerDispatch({ type: DrawerActions.DISMISS });
+          }}
           elemBefore={(<BoardIcon label="Board icon" /> as unknown) as Node}
         >
           Create Workspace

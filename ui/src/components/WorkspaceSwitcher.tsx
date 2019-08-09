@@ -43,16 +43,7 @@ export const WorkspaceSwitcher: React.FunctionComponent = () => {
       .find(val => val.id === settings.data.settings.lastOpenWorkspace);
   };
   const create = () => ({
-    onClick: () => {
-      // eslint-disable-next-line
-      const boardName = window.prompt(
-        "What would you like to call your new board?"
-      );
-      if (boardName && boardName.length) {
-        // eslint-disable-next-line
-        console.log(`You created the board "${boardName}"`);
-      }
-    },
+    onClick: () => {},
     text: "Create Workspace"
   });
   const target = obj => {
@@ -79,6 +70,16 @@ export const WorkspaceSwitcher: React.FunctionComponent = () => {
   };
   const onChange = selected => {
     console.log(selected);
+
+    folder.openWorkspace(selected.id);
+
+    // Update Settings
+    const settingData = {
+      ...settings.data.settings,
+      lastOpenFile: "",
+      lastOpenWorkspace: selected.id
+    };
+    settings.updateSettings(JSON.stringify(settingData));
   };
   return (
     <Switcher

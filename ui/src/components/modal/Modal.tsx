@@ -6,6 +6,7 @@ import { ModalType, ModalActions } from "../../store/ModalStore";
 
 import { SettingsModal } from "./SettingsModal";
 import { CreateFileModal } from "./CreateFileModal";
+import { CreateWorkspaceModal } from "./CreateWorkspaceModal";
 
 export const Modal: React.FunctionComponent = () => {
   const modalState = React.useContext(ModalStore.State);
@@ -29,6 +30,9 @@ export const Modal: React.FunctionComponent = () => {
       }
       case ModalType.File: {
         return <CreateFileModal />;
+      }
+      case ModalType.Workspace: {
+        return <CreateWorkspaceModal />;
       }
       default: {
         return (

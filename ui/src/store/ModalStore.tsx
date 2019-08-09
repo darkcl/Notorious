@@ -2,16 +2,19 @@ import * as React from "react";
 
 export enum ModalActions {
   SHOW_FILE_MODAL = "SHOW_FILE_MODAL",
+  SHOW_WORKSPACE_MODAL = "SHOW_WORKSPACE_MODAL",
   SHOW_SETTINGS_MODAL = "SHOW_SETTINGS_MODAL",
   SUBMIT_SETTINGS = "SUBMIT_SETTINGS",
   SUBMIT_CREATE_FILE = "SUBMIT_CREATE_FILE",
+  SUBMIT_CREATE_WORKSPACE = "SUBMIT_CREATE_WORKSPACE",
   DISMISS = "DISMISS"
 }
 
 export enum ModalType {
   None = -1,
   File = 0,
-  Settings = 1
+  Settings = 1,
+  Workspace = 2
 }
 
 declare var folder;
@@ -30,24 +33,34 @@ const initialState: IModalState = {
 
 type ModalAction =
   | { type: ModalActions.SHOW_FILE_MODAL }
+  | { type: ModalActions.SHOW_WORKSPACE_MODAL }
   | { type: ModalActions.SHOW_SETTINGS_MODAL }
   | { type: ModalActions.SUBMIT_SETTINGS; settings: string }
   | { type: ModalActions.SUBMIT_CREATE_FILE; title: string }
+  | { type: ModalActions.SUBMIT_CREATE_WORKSPACE; title: string }
   | { type: ModalActions.DISMISS };
 
 function reducer(state: IModalState, action: ModalAction): IModalState {
   console.log("reducer:", state, action);
   switch (action.type) {
-    case ModalActions.SHOW_FILE_MODAL:
+    case ModalActions.SHOW_FILE_MODAL: {
       return {
         ...state,
         modalType: ModalType.File
       };
-    case ModalActions.SHOW_SETTINGS_MODAL:
+    }
+    case ModalActions.SHOW_WORKSPACE_MODAL: {
+      return {
+        ...state,
+        modalType: ModalType.Workspace
+      };
+    }
+    case ModalActions.SHOW_SETTINGS_MODAL: {
       return {
         ...state,
         modalType: ModalType.Settings
       };
+    }
     case ModalActions.SUBMIT_SETTINGS: {
       settings.updateSettings(action.settings);
       return {
@@ -59,6 +72,24 @@ function reducer(state: IModalState, action: ModalAction): IModalState {
       // Create file
       const workspace = settings.data.settings.lastOpenWorkspace;
       folder.create(action.title, workspace);
+      return {
+        ...state,
+        modalType: ModalType.None
+      };
+    }
+    case ModalActions.SUBMIT_CREATE_WORKSPACE: {
+      // Create Workspace
+      folder.createWorkspace(action.title);
+      folder.openWorkspace(action.title);
+
+      // Update Settings
+      const settingData = {
+        ...settings.data.settings,
+        lastOpenFile: "",
+        lastOpenWorkspace: action.title
+      };
+      settings.updateSettings(JSON.stringify(settingData));
+
       return {
         ...state,
         modalType: ModalType.None
