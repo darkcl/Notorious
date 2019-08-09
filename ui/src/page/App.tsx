@@ -37,25 +37,13 @@ const Global: React.FunctionComponent = () => {
   return (
     <GlobalNavigation
       productIcon={AppIcon}
-      productHref="#"
+      productTooltip="Notorious"
       onProductClick={() => console.log("product clicked")}
       onCreateClick={() => drawerDispatch({ type: DrawerActions.SHOW })}
-      onSearchClick={() => {
-        console.log("search click");
-      }}
-      onStarredClick={() => {
-        console.log("starred clicked");
-      }}
-      onHelpClick={() => console.log("help clicked")}
-      helpItems={() => <div />}
-      onNotificationClick={() => console.log("notification clicked")}
-      appSwitcherComponent={AppSwitcherComponent}
-      appSwitcherTooltip="Switch to ..."
       onSettingsClick={() => {
         console.log("settings clicked");
         modalDispatch({ type: ModalActions.SHOW_SETTINGS_MODAL });
       }}
-      loginHref="#login"
     />
   );
 };
