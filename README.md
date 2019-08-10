@@ -21,13 +21,13 @@
 - [ ] File I/O
   - [x] Create File
   - [ ] Delete File
-  - [ ] Create Workspace
+  - [x] Create Workspace
   - [ ] Export
     - [ ] As HTML
     - [ ] As PDF
-- [ ] Jira Issue
-  - [ ] Pull Request
-  - [ ] Link to issue
+- [x] Jira Issue
+  - [x] Pull Request
+  - [x] Link to issue
 - [ ] Search
 
 ## Author
