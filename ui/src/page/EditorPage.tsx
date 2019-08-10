@@ -3,8 +3,8 @@ import * as ReactMarkdown from "react-markdown/with-html";
 
 import "../style/EditorPage.css";
 
-import { Editor } from "../components/Editor";
-import { CodeBlock } from "../components/CodeBlock";
+import { Editor } from "../components/editor/Editor";
+import { CodeBlock } from "../components/codeblock/CodeBlock";
 import { EditorStore } from "../store";
 import { EditorActions } from "../store/EditorStore";
 

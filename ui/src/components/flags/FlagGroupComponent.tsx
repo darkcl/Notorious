@@ -1,7 +1,7 @@
 import * as React from "react";
 import Flag from "@atlaskit/flag";
 import { FlagGroup } from "@atlaskit/flag";
-import { FlagStore, FlagActions, IFlagState } from "../store/FlagStore";
+import { FlagStore, FlagActions, IFlagState } from "../../store/FlagStore";
 
 import Error from "@atlaskit/icon/glyph/error";
 import Info from "@atlaskit/icon/glyph/info";

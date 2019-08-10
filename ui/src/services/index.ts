@@ -1,1 +1,1 @@
-export * from "./JIRA";
+export * from "./jira/JIRA";

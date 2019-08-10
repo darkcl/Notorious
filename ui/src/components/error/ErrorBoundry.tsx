@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FlagStore, FlagActions } from "../store/FlagStore";
+import { FlagStore, FlagActions } from "../../store/FlagStore";
 
 export class ErrorBoundary extends React.Component<{}, {}> {
   constructor(props) {

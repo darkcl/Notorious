@@ -2,9 +2,9 @@ import * as React from "react";
 import Button from "@atlaskit/button";
 import { ButtonGroup } from "@atlaskit/button";
 
-import { JIRA } from "../services";
-import { FlagStore, FlagActions } from "../store/FlagStore";
-import { DevStatusDialog } from "./devstatus/DevStatusDialog";
+import { JIRA } from "../../services";
+import { FlagStore, FlagActions } from "../../store/FlagStore";
+import { DevStatusDialog } from "../devstatus/DevStatusDialog";
 
 declare var settings;
 declare var external;

@@ -5,7 +5,7 @@ import {
   ItemAvatar,
   Switcher
 } from "@atlaskit/navigation-next";
-import { NavigationStore } from "../store/NavigationStore";
+import { NavigationStore } from "../../../store/NavigationStore";
 
 declare var folder;
 declare var settings;

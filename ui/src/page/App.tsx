@@ -9,15 +9,15 @@ import AppSwitcherIcon from "@atlaskit/icon/glyph/app-switcher";
 import GlobalNavigation from "@atlaskit/global-navigation";
 
 import { EditorPage } from "./EditorPage";
-import { ProductNavigation } from "../components/ProductNavigation";
-import { ContainerNavigation } from "../components/ContainerNavigation";
+import { ProductNavigation } from "../components/navigation/ProductNavigation";
+import { ContainerNavigation } from "../components/navigation/container/ContainerNavigation";
 import { EditorStore, ModalStore } from "../store";
 import { EditorActions } from "../store/EditorStore";
-import { EmptyPage } from "../components/EmptyPage";
+import { EmptyPage } from "../components/empty/EmptyPage";
 import { ModalActions } from "../store/ModalStore";
 import { DrawerStore, DrawerActions } from "../store/DrawerStore";
 
-import { AppIcon } from "../components/AppIcon";
+import { AppIcon } from "../components/icons/AppIcon";
 
 declare var folder;
 

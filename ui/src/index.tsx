@@ -7,8 +7,8 @@ import "@atlaskit/css-reset/dist/bundle.css";
 import App from "./page/App";
 import { Store } from "./store";
 import { Modal } from "./components/modal/Modal";
-import { FlagGroupComponent } from "./components/FlagGroupComponent";
-import { ErrorBoundary } from "./components/ErrorBoundry";
+import { FlagGroupComponent } from "./components/flags/FlagGroupComponent";
+import { ErrorBoundary } from "./components/error/ErrorBoundry";
 import { DrawerComponent } from "./components/drawer/DrawerComponent";
 
 declare var external;

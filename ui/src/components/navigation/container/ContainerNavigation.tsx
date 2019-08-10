@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Fragment } from "react";
 import { HeaderSection, MenuSection, Item } from "@atlaskit/navigation-next";
-import { EditorStore } from "../store";
-import { EditorActions } from "../store/EditorStore";
+import { EditorStore } from "../../../store";
+import { EditorActions } from "../../../store/EditorStore";
 import { WorkspaceSwitcher } from "./WorkspaceSwitcher";
 
 declare var folder;

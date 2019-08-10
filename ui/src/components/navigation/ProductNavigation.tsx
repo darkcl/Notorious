@@ -9,7 +9,10 @@ import {
   Separator,
   Wordmark
 } from "@atlaskit/navigation-next";
-import { NavigationStore, NavigationActions } from "../store/NavigationStore";
+import {
+  NavigationStore,
+  NavigationActions
+} from "../../store/NavigationStore";
 
 declare var folder;
 

@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as CodeMirror from "@skidding/react-codemirror";
-import { IEditor } from "../interface/IEditor";
+import { IEditor } from "../../interface/IEditor";
 
 import "codemirror/lib/codemirror.css";
 import "codemirror/mode/javascript/javascript";
