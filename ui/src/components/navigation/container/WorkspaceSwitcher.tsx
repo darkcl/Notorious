@@ -5,14 +5,13 @@ import {
   ItemAvatar,
   Switcher
 } from "@atlaskit/navigation-next";
-import { NavigationStore } from "../../../store/NavigationStore";
+import { ModalStore, ModalActions } from "../../../store/ModalStore";
 
 declare var folder;
 declare var settings;
 
 export const WorkspaceSwitcher: React.FunctionComponent = () => {
-  const naviationDispatcher = React.useContext(NavigationStore.Dispatch);
-
+  const modalDispatch = React.useContext(ModalStore.Dispatch);
   const capitalize = s => {
     if (typeof s !== "string") return "";
     return s.charAt(0).toUpperCase() + s.slice(1);
@@ -43,7 +42,11 @@ export const WorkspaceSwitcher: React.FunctionComponent = () => {
       .find(val => val.id === settings.data.settings.lastOpenWorkspace);
   };
   const create = () => ({
-    onClick: () => {},
+    onClick: () => {
+      modalDispatch({
+        type: ModalActions.SHOW_WORKSPACE_MODAL
+      });
+    },
     text: "Create Workspace"
   });
   const target = obj => {
