@@ -3,7 +3,6 @@ import Button from "@atlaskit/button";
 import { ButtonGroup } from "@atlaskit/button";
 
 import { JIRA } from "../../services";
-import { FlagStore, FlagActions } from "../../store/FlagStore";
 import { DevStatusDialog } from "../devstatus/DevStatusDialog";
 
 declare var settings;
@@ -16,8 +15,6 @@ const Row = (props: React.HTMLProps<HTMLDivElement>) => (
 export const JiraBlock: React.FunctionComponent<{
   issueKey: string;
 }> = props => {
-  const flagDispatch = React.useContext(FlagStore.Dispatch);
-
   const getJiraClient = () => {
     // Get Jira Setting from golang bindings
     const jiraSettings = settings.data.settings.jira;
@@ -45,26 +42,6 @@ export const JiraBlock: React.FunctionComponent<{
     }
   };
 
-  const onPullRequestClick = async () => {
-    const client = getJiraClient();
-    if (client !== null) {
-      try {
-        const res = await client.getIssue(props.issueKey);
-        const prData = await client.getDevelopmentStatus(res.id);
-      } catch (e) {
-        flagDispatch({
-          type: FlagActions.SHOW_WARNING,
-          message: e.message
-        });
-      }
-    }
-  };
-
-  const onRepositoryClick = () => {
-    const client = getJiraClient();
-    if (client !== null) {
-    }
-  };
   return (
     <div>
       <Row>
