@@ -6,11 +6,14 @@ import {
   Switcher
 } from "@atlaskit/navigation-next";
 import { ModalStore, ModalActions } from "../../../store/ModalStore";
+import { EditorStore } from "../../../store";
+import { EditorActions } from "../../../store/EditorStore";
 
 declare var folder;
 declare var settings;
 
 export const WorkspaceSwitcher: React.FunctionComponent = () => {
+  const editorDispatch = React.useContext(EditorStore.Dispatch);
   const modalDispatch = React.useContext(ModalStore.Dispatch);
   const capitalize = s => {
     if (typeof s !== "string") return "";
@@ -76,13 +79,30 @@ export const WorkspaceSwitcher: React.FunctionComponent = () => {
 
     folder.openWorkspace(selected.id);
 
+    let lastOpenFile = "";
+
+    if (
+      folder.data.currentPath !== undefined &&
+      folder.data.currentPath.length > 0
+    ) {
+      lastOpenFile = folder.data.currentPath.substring(
+        folder.data.currentPath.lastIndexOf("/") + 1
+      );
+    }
+
     // Update Settings
     const settingData = {
       ...settings.data.settings,
-      lastOpenFile: "",
+      lastOpenFile,
       lastOpenWorkspace: selected.id
     };
     settings.updateSettings(JSON.stringify(settingData));
+
+    setTimeout(() => {
+      editorDispatch({
+        type: EditorActions.RELOAD_FILE
+      });
+    }, 100);
   };
   return (
     <Switcher
