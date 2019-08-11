@@ -7,6 +7,7 @@ import { ModalType, ModalActions } from "../../store/ModalStore";
 import { SettingsModal } from "./SettingsModal";
 import { CreateFileModal } from "./CreateFileModal";
 import { CreateWorkspaceModal } from "./CreateWorkspaceModal";
+import { CodeExecutionModal } from "./CodeExecutionModal";
 
 export const Modal: React.FunctionComponent = () => {
   const modalState = React.useContext(ModalStore.State);
@@ -33,6 +34,9 @@ export const Modal: React.FunctionComponent = () => {
       }
       case ModalType.Workspace: {
         return <CreateWorkspaceModal />;
+      }
+      case ModalType.CodeExec: {
+        return <CodeExecutionModal />;
       }
       default: {
         return (

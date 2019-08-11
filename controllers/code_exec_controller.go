@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
+	"os"
 	"os/exec"
 	"path/filepath"
 
@@ -40,7 +41,7 @@ func (c *CodeExecutionController) Execute(language string, code string) {
 			Error:       "",
 		}
 		tmpFile := filepath.Join(dir, fileID.String())
-		fmt.Printf("Write code file to %s", tmpFile)
+		defer os.Remove(tmpFile)
 		if err := ioutil.WriteFile(tmpFile, []byte(code), 0666); err != nil {
 			fmt.Println(err)
 			panic(err)
@@ -58,6 +59,9 @@ func (c *CodeExecutionController) Execute(language string, code string) {
 		outStr, errStr := string(stdout.Bytes()), string(stderr.Bytes())
 		c.Task.Output = outStr
 		c.Task.Error = errStr
+
+		fmt.Println(outStr)
+		fmt.Println(errStr)
 	}
 
 }
@@ -74,7 +78,9 @@ func canExecute(language string) bool {
 	case
 		"ruby",
 		"rb",
-		"python":
+		"python",
+		"js",
+		"javascript":
 		return true
 	}
 	return false
@@ -89,6 +95,10 @@ func langToCmd(language string) string {
 	case
 		"python":
 		return "python"
+	case
+		"js",
+		"javascript":
+		return "node"
 	}
 	return ""
 }
