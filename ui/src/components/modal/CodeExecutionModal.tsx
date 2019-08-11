@@ -15,6 +15,8 @@ export const CodeExecutionModal: React.FunctionComponent = props => {
   const modalDispatch = React.useContext(ModalStore.Dispatch);
 
   const close = () => {
+    const codeExec = CodeExecService();
+    codeExec.clear();
     modalDispatch({
       type: ModalActions.DISMISS
     });

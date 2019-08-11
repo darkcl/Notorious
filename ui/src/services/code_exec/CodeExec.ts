@@ -14,7 +14,7 @@ export interface CodeExecutionData {
 export interface CodeExecutionController {
   data: CodeExecutionData;
   execute: (language: string, code: string) => void;
-  cleare: () => void;
+  clear: () => void;
 }
 
 declare var codeExec: CodeExecutionController;
