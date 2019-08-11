@@ -53,7 +53,9 @@ func (c *CodeExecutionController) Execute(language string, code string) {
 		cmd.Stderr = &stderr
 		err = cmd.Run()
 		if err != nil {
-			fmt.Printf("cmd.Run() failed with %s\n", err)
+			c.Task.Error = err.Error()
+			c.Task.IsCompleted = true
+			return
 		}
 		c.Task.IsCompleted = true
 		outStr, errStr := string(stdout.Bytes()), string(stderr.Bytes())
@@ -98,7 +100,7 @@ func langToCmd(language string) string {
 	case
 		"js",
 		"javascript":
-		return "node"
+		return "/usr/local/bin/node"
 	}
 	return ""
 }
