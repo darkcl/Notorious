@@ -5,6 +5,7 @@ import Button from "@atlaskit/button";
 import styled from "styled-components";
 import VidPlayIcon from "@atlaskit/icon/glyph/vid-play";
 import CopyIcon from "@atlaskit/icon/glyph/copy";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const ButtonContent = styled.div`
   display: flex ${props => (props.hidden ? "none" : "block")};
@@ -35,7 +36,9 @@ export const ProgrammeCodeBlock: React.FunctionComponent<{
         <Button iconBefore={<VidPlayIcon label="play" />} appearance="subtle">
           Run
         </Button>
-        <Button iconBefore={<CopyIcon label="copy" />} appearance="subtle" />
+        <CopyToClipboard text={props.text}>
+          <Button iconBefore={<CopyIcon label="copy" />} appearance="subtle" />
+        </CopyToClipboard>
       </ButtonContent>
       <AkCodeBlock language={props.language} text={props.text} />
     </Container>
