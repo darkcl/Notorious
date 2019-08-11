@@ -10,8 +10,8 @@ import (
 
 	"github.com/darkcl/Notorious/controllers"
 	"github.com/darkcl/Notorious/helpers"
-	"github.com/leaanthony/mewn"
 	webview "github.com/darkcl/webview"
+	"github.com/leaanthony/mewn"
 	"github.com/mitchellh/go-homedir"
 )
 
@@ -107,6 +107,7 @@ func main() {
 
 	settings := controllers.NewSettingsController()
 	folder := controllers.NewFolderController(w)
+	codeExec := controllers.NewCodeExecutionController()
 
 	if settings.Settings.LastOpenFile != "" && settings.Settings.LastOpenWorkspace != "" {
 		folder.Open(filepath.Join(settingPath, settings.Settings.LastOpenWorkspace, settings.Settings.LastOpenFile))
@@ -116,6 +117,7 @@ func main() {
 		// Inject controller
 		w.Bind("folder", folder)
 		w.Bind("settings", settings)
+		w.Bind("codeExec", codeExec)
 	})
 	w.Run()
 }
