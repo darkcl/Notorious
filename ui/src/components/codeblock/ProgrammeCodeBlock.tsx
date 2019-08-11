@@ -1,0 +1,43 @@
+import * as React from "react";
+
+import { AkCodeBlock } from "@atlaskit/code";
+import Button from "@atlaskit/button";
+import styled from "styled-components";
+import VidPlayIcon from "@atlaskit/icon/glyph/vid-play";
+import CopyIcon from "@atlaskit/icon/glyph/copy";
+
+const ButtonContent = styled.div`
+  display: flex ${props => (props.hidden ? "none" : "block")};
+  position: absolute;
+  top: 0px;
+  right: 0px;
+`;
+
+const Container = styled.div`
+  position: relative;
+`;
+
+export const ProgrammeCodeBlock: React.FunctionComponent<{
+  language: string;
+  text: string;
+}> = props => {
+  const [isHover, setIsHover] = React.useState(false);
+  return (
+    <Container
+      onMouseEnter={() => {
+        setIsHover(true);
+      }}
+      onMouseLeave={() => {
+        setIsHover(false);
+      }}
+    >
+      <ButtonContent hidden={!isHover}>
+        <Button iconBefore={<VidPlayIcon label="play" />} appearance="subtle">
+          Run
+        </Button>
+        <Button iconBefore={<CopyIcon label="copy" />} appearance="subtle" />
+      </ButtonContent>
+      <AkCodeBlock language={props.language} text={props.text} />
+    </Container>
+  );
+};

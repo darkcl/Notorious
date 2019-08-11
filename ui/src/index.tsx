@@ -14,6 +14,7 @@ import { DrawerComponent } from "./components/drawer/DrawerComponent";
 declare var external;
 declare var folder;
 declare var settings;
+declare var codeExec;
 
 const render = () =>
   ReactDOM.render(
@@ -30,6 +31,7 @@ const render = () =>
 
 folder.render = render;
 settings.render = render;
+codeExec.render = render;
 
 window.onclick = function(e) {
   const elem = e.target as Element;

@@ -1,7 +1,7 @@
 import * as React from "react";
-import { AkCodeBlock } from "@atlaskit/code";
 import { MermaidBlock } from "./MermaidBlock";
 import { JiraBlock } from "./JiraBlock";
+import { ProgrammeCodeBlock } from "./ProgrammeCodeBlock";
 
 interface ICodeBlock {
   value;
@@ -24,7 +24,7 @@ export class CodeBlock extends React.Component<ICodeBlock, {}> {
       case "jira":
         return <JiraBlock issueKey={value} />;
       default:
-        return <AkCodeBlock language={language} text={value} />;
+        return <ProgrammeCodeBlock language={language} text={value} />;
     }
   };
 
