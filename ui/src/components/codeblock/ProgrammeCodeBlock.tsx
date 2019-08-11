@@ -28,6 +28,12 @@ export const ProgrammeCodeBlock: React.FunctionComponent<{
   const [isHover, setIsHover] = React.useState(false);
 
   const modalDispatch = React.useContext(ModalStore.Dispatch);
+
+  const supportedRuntime = (): boolean => {
+    const supportedLanguage = ["js", "javascript", "python", "rb", "ruby"];
+    return supportedLanguage.indexOf(props.language) > -1;
+  };
+
   return (
     <Container
       onMouseEnter={() => {
@@ -38,19 +44,21 @@ export const ProgrammeCodeBlock: React.FunctionComponent<{
       }}
     >
       <ButtonContent hidden={!isHover}>
-        <Button
-          iconBefore={<VidPlayIcon label="play" />}
-          appearance="subtle"
-          onClick={() => {
-            CodeExecService().execute(props.language, props.text);
+        {supportedRuntime() && (
+          <Button
+            iconBefore={<VidPlayIcon label="play" />}
+            appearance="subtle"
+            onClick={() => {
+              CodeExecService().execute(props.language, props.text);
 
-            modalDispatch({
-              type: ModalActions.SHOW_CODE_EXEC_MODAL
-            });
-          }}
-        >
-          Run
-        </Button>
+              modalDispatch({
+                type: ModalActions.SHOW_CODE_EXEC_MODAL
+              });
+            }}
+          >
+            Run
+          </Button>
+        )}
         <CopyToClipboard text={props.text}>
           <Button iconBefore={<CopyIcon label="copy" />} appearance="subtle" />
         </CopyToClipboard>
