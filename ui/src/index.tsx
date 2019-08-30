@@ -10,6 +10,7 @@ import { Modal } from "./components/modal/Modal";
 import { FlagGroupComponent } from "./components/flags/FlagGroupComponent";
 import { ErrorBoundary } from "./components/error/ErrorBoundry";
 import { DrawerComponent } from "./components/drawer/DrawerComponent";
+import { IPCRenderer } from "./ipc";
 
 declare var external;
 declare var folder;
@@ -33,11 +34,16 @@ folder.render = render;
 settings.render = render;
 codeExec.render = render;
 
-window.onclick = function(e) {
+window.renderer = new IPCRenderer();
+
+window.onclick = function (e) {
   const elem = e.target as Element;
   if (elem.localName === "a") {
     e.preventDefault();
-    external.invoke("openlink: " + elem.getAttribute("href"));
+    window.renderer.send({
+      evt: "openlink",
+      val: elem.getAttribute("href")
+    });
   }
 };
 
