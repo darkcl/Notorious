@@ -1,15 +1,16 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
-	"strings"
 
 	"github.com/darkcl/Notorious/controllers"
 	"github.com/darkcl/Notorious/helpers"
+	"github.com/darkcl/Notorious/ipc"
 	webview "github.com/darkcl/webview"
 	"github.com/leaanthony/mewn"
 	"github.com/mitchellh/go-homedir"
@@ -18,16 +19,16 @@ import (
 var settingPath string
 
 func handleRPC(w webview.WebView, data string) {
-	switch {
-	case strings.HasPrefix(data, "editor.onChange: "):
-		fmt.Printf("editor.onChange:\n%s\n", strings.TrimPrefix(data, "editor.onChange: "))
-	case strings.HasPrefix(data, "openlink: "):
-		url := strings.TrimPrefix(data, "openlink: ")
-		fmt.Printf("openlink:\n%s\n", url)
-		helpers.OpenBrowser(url)
-	default:
-		panic("Not Implemented")
+	var message ipc.Message
+	err := json.Unmarshal([]byte(data), &message)
+
+	if err != nil {
+		fmt.Printf("Error on handle rpc data: %v\n", err)
+		return
 	}
+
+	ipcMain := ipc.SharedMain()
+	ipcMain.Trigger(message)
 }
 
 func setupSettings() {
@@ -112,6 +113,16 @@ func main() {
 	if settings.Settings.LastOpenFile != "" && settings.Settings.LastOpenWorkspace != "" {
 		folder.Open(filepath.Join(settingPath, settings.Settings.LastOpenWorkspace, settings.Settings.LastOpenFile))
 	}
+
+	ipcMain := ipc.SharedMain()
+	ipcMain.SetView(w)
+	ipcMain.On(
+		"openlink",
+		func(event string, value interface{}) interface{} {
+			url := value.(string)
+			helpers.OpenBrowser(url)
+			return nil
+		})
 
 	w.Dispatch(func() {
 		// Inject controller
