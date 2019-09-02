@@ -9,3 +9,15 @@ type CodeExecutaion struct {
 	Output      string `json:"output"`
 	Error       string `json:"error,omitempty"`
 }
+
+// CodeExecutaionRequest - descripe a code execution request
+type CodeExecutaionRequest struct {
+	Language     string `json:"language"`
+	CodeSnippent string `json:"code"`
+}
+
+// CodeExecutaionResponse - descripe a code execution response
+type CodeExecutaionResponse struct {
+	Error  string `json:"error,omitempty"`
+	Output string `json:"output,omitempty"`
+}

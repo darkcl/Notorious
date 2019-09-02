@@ -36,7 +36,13 @@ export const Modal: React.FunctionComponent = () => {
         return <CreateWorkspaceModal />;
       }
       case ModalType.CodeExec: {
-        return <CodeExecutionModal />;
+        const { execution } = modalState;
+        return (
+          <CodeExecutionModal
+            language={execution.language}
+            code={execution.code}
+          />
+        );
       }
       default: {
         return (

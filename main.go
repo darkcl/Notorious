@@ -108,7 +108,6 @@ func main() {
 
 	settings := controllers.NewSettingsController()
 	folder := controllers.NewFolderController(w)
-	codeExec := controllers.NewCodeExecutionController()
 
 	if settings.Settings.LastOpenFile != "" && settings.Settings.LastOpenWorkspace != "" {
 		folder.Open(filepath.Join(settingPath, settings.Settings.LastOpenWorkspace, settings.Settings.LastOpenFile))
@@ -124,11 +123,19 @@ func main() {
 			return nil
 		})
 
+	ipcMain.On(
+		"code-exec-request",
+		func(event string, value interface{}) interface{} {
+			jsonString := value.(string)
+			controller := controllers.NewCodeExecutionController()
+			controller.ParseAndExecute(jsonString)
+			return nil
+		})
+
 	w.Dispatch(func() {
 		// Inject controller
 		w.Bind("folder", folder)
 		w.Bind("settings", settings)
-		w.Bind("codeExec", codeExec)
 	})
 	w.Run()
 }

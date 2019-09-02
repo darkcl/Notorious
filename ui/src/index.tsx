@@ -12,10 +12,8 @@ import { ErrorBoundary } from "./components/error/ErrorBoundry";
 import { DrawerComponent } from "./components/drawer/DrawerComponent";
 import { IPCRenderer } from "./ipc";
 
-declare var external;
 declare var folder;
 declare var settings;
-declare var codeExec;
 
 const render = () =>
   ReactDOM.render(
@@ -32,11 +30,10 @@ const render = () =>
 
 folder.render = render;
 settings.render = render;
-codeExec.render = render;
 
 window.renderer = new IPCRenderer();
 
-window.onclick = function (e) {
+window.onclick = function(e) {
   const elem = e.target as Element;
   if (elem.localName === "a") {
     e.preventDefault();
