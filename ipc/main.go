@@ -48,13 +48,14 @@ func (m *Main) On(event string, cb EventCallback) {
 func (m *Main) Send(event string, value interface{}) {
 	fmt.Println("Send Event")
 	jsonString, err := json.Marshal(value)
-
+	fmt.Println(string(jsonString))
 	if err != nil {
 		fmt.Printf("Error on sending value: %v\n", err)
 		return
 	}
 
 	jsString := fmt.Sprintf(`window.renderer.trigger("%s", "%s")`, event, template.JSEscapeString(string(jsonString)))
+	fmt.Println(jsString)
 	m.w.Eval(jsString)
 }
 

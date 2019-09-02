@@ -16,6 +16,7 @@ export class IPCRenderer {
   }
 
   public trigger(event: string, value: string) {
+    console.log(`Trigger ${event}: ${value}`);
     const cb = this.eventTable[event];
     if (cb !== undefined) {
       cb(event, JSON.parse(value));

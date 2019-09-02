@@ -8,7 +8,6 @@ import CopyIcon from "@atlaskit/icon/glyph/copy";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { ModalStore } from "../../store";
 import { ModalActions } from "../../store/ModalStore";
-import { CodeExecService } from "../../services/code_exec/CodeExec";
 
 const ButtonContent = styled.div`
   display: flex ${props => (props.hidden ? "none" : "block")};
@@ -49,10 +48,10 @@ export const ProgrammeCodeBlock: React.FunctionComponent<{
             iconBefore={<VidPlayIcon label="play" />}
             appearance="subtle"
             onClick={() => {
-              CodeExecService().execute(props.language, props.text);
-
               modalDispatch({
-                type: ModalActions.SHOW_CODE_EXEC_MODAL
+                type: ModalActions.SHOW_CODE_EXEC_MODAL,
+                language: props.language,
+                code: props.text
               });
             }}
           >
