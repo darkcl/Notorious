@@ -1,0 +1,133 @@
+name: build
+on: [push]
+jobs:
+  build-ui:
+    name: Build UI Assets
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Building UI assets with Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install, build, and test
+        run: |
+          cd ui
+          yarn install
+          yarn build
+          cd dist/
+        env:
+          CI: true
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: notorious-ui
+          path: ui/dist
+
+  build-mac:
+    name: Build macOS Application
+    needs: build-ui
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macOS-10.14]
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: actions/download-artifact@master
+        with:
+          name: notorious-ui
+          path: ui/dist
+
+      - name: List directory
+        run: |
+          ls ui/dist
+
+      - name: Using Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install create-dmg
+        run: |
+          npm i -g create-dmg
+
+      - name: Set up Go 1.13
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.13
+        id: go
+
+      - name: Get dependencies
+        run: |
+          go get -v -t -d ./...
+
+      - name: Build macOS Application
+        env:
+          GO111MODULE: on
+        run: |
+          make build-mewn
+          mkdir -p ./build/Production/Notorious.app/Contents/MacOS
+          mkdir -p ./build/Production/Notorious.app/Contents/Resources
+          cp ./meta/Info.plist ./build/Production/Notorious.app/Contents/
+          build/mewn build -o build/Production/Notorious.app/Contents/MacOS/Notorious
+          make -i build-dmg
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: notorious-mac
+          path: Notorious 0.0.1.dmg
+
+  build-win32:
+    name: Build Windows Application
+    needs: build-ui
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-2019]
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: actions/download-artifact@master
+        with:
+          name: notorious-ui
+          path: ui/dist
+
+      - name: List directory
+        run: |
+          dir .\ui\dist
+
+      - name: Set up Go 1.13
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.13
+        id: go
+
+      - name: Get dependencies
+        run: |
+          go get -v -t -d ./...
+
+      - name: Build windows application
+        env:
+          GO111MODULE: on
+        run: |
+          go build -o .\build\mewn.exe cmd\mewn\main.go
+          mkdir -p .\build\Production
+          .\build\mewn.exe build -o .\build\Production\Notorious.exe
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: notorious-win32
+          path: build\Production\Notorious.exe
