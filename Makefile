@@ -1,4 +1,7 @@
-.PHONY: build debug
+.PHONY: build build-mewn debug
+
+build-mewn:
+	@go build -o build/mewn cmd/mewn/main.go
 
 build:
 	@rm -Rf ./build/Production/Notorious.app/
