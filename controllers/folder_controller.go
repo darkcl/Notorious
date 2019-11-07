@@ -9,8 +9,8 @@ import (
 	"path"
 	"path/filepath"
 
+	"github.com/darkcl/Notorious/lib/webview"
 	"github.com/darkcl/Notorious/models"
-	"github.com/darkcl/webview"
 	"github.com/mitchellh/go-homedir"
 )
 
