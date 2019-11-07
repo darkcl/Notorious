@@ -6,7 +6,7 @@ import (
 	"sync"
 	"text/template"
 
-	"github.com/darkcl/webview"
+	"github.com/darkcl/Notorious/lib/webview"
 )
 
 // EventCallback - event reciever callback
