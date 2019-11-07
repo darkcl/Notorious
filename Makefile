@@ -3,6 +3,9 @@
 build-mewn:
 	@go build -o build/mewn cmd/mewn/main.go
 
+build-dmg:
+	create-dmg ./build/Production/Notorious.app
+
 build:
 	@rm -Rf ./build/Production/Notorious.app/
 	@mkdir -p ./build/Production/Notorious.app/Contents/MacOS
