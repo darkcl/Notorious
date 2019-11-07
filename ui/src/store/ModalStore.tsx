@@ -25,19 +25,26 @@ declare var settings;
 const State = React.createContext(null);
 const Dispatch = React.createContext(null);
 
+interface CodeExecution {
+  language: string;
+  code: string;
+}
+
 interface IModalState {
   modalType: ModalType;
+  execution: CodeExecution;
 }
 
 const initialState: IModalState = {
-  modalType: ModalType.None
+  modalType: ModalType.None,
+  execution: null
 };
 
 type ModalAction =
   | { type: ModalActions.SHOW_FILE_MODAL }
   | { type: ModalActions.SHOW_WORKSPACE_MODAL }
   | { type: ModalActions.SHOW_SETTINGS_MODAL }
-  | { type: ModalActions.SHOW_CODE_EXEC_MODAL }
+  | { type: ModalActions.SHOW_CODE_EXEC_MODAL; language: string; code: string }
   | { type: ModalActions.SUBMIT_SETTINGS; settings: string }
   | { type: ModalActions.SUBMIT_CREATE_FILE; title: string }
   | { type: ModalActions.SUBMIT_CREATE_WORKSPACE; title: string }
@@ -61,7 +68,11 @@ function reducer(state: IModalState, action: ModalAction): IModalState {
     case ModalActions.SHOW_CODE_EXEC_MODAL: {
       return {
         ...state,
-        modalType: ModalType.CodeExec
+        modalType: ModalType.CodeExec,
+        execution: {
+          language: action.language,
+          code: action.code
+        }
       };
     }
     case ModalActions.SHOW_SETTINGS_MODAL: {
@@ -107,7 +118,8 @@ function reducer(state: IModalState, action: ModalAction): IModalState {
     case ModalActions.DISMISS:
       return {
         ...state,
-        modalType: ModalType.None
+        modalType: ModalType.None,
+        execution: null
       };
     default:
       return initialState;

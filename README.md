@@ -4,6 +4,8 @@
 </p>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=2592000" />
+  <img alt="build status" src=https://github.com/darkcl/Notorious/workflows/build/badge.svg />
+  <img alt="release status" src=https://github.com/darkcl/Notorious/workflows/release/badge.svg />
   <a href="https://twitter.com/darkcl_dev">
     <img alt="Twitter: darkcl_dev" src="https://img.shields.io/twitter/follow/darkcl_dev.svg?style=social" target="_blank" />
   </a>
